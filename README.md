@@ -5,8 +5,7 @@ Un panorama diario de noticias que se arma solo. Todas las mañanas, alrededor d
 horas de tus temas, arma una página y la publica en una URL fija. Tu computadora no
 participa: puede estar apagada.
 
-**La URL de todos los días:** `https://TU-USUARIO.github.io/panorama-diario/`
-*(completar cuando esté activada la publicación)*
+**La URL de todos los días:** https://gonzalohzw.github.io/panorama-diario/
 
 ---
 
