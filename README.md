@@ -78,6 +78,19 @@ La primera vez, antes, hay que crear el entorno:
 python3 -m venv venv && venv/bin/pip install -r requirements.txt
 ```
 
+## Si GitHub Desktop habla de "conflicts" al subir
+
+Pasa cuando se trabajó en la computadora el mismo día que el robot ya había
+generado su panorama en la nube: los dos escribieron los mismos archivos de
+`docs/`. **No hay nada valioso en juego** — esos archivos se regeneran solos
+cada mañana, cualquier versión sirve. La salida simple: en el aviso de
+conflictos, usá la flechita al lado de "Open in editor" y elegí quedarte con
+una de las dos versiones (cualquiera), después "Continue Merge" y "Push
+origin". Y para que no vuelva a pasar: antes de trabajar en la computadora,
+tocá **Fetch origin / Pull origin** en GitHub Desktop, que trae primero lo
+que hizo la nube. Editando `temas.yml` directo en la web de GitHub esto no
+pasa nunca.
+
 ## Cómo está armado
 
 ```
