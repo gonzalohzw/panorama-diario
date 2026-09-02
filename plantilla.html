@@ -6,6 +6,8 @@
 <meta name="theme-color" content="#F2F2F2" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#030826" media="(prefers-color-scheme: dark)">
 <title>{{ titulo }} — {{ fecha_corta }}</title>
+<link rel="icon" type="image/png" href="{{ '../' if es_historico else '' }}icono.png">
+<link rel="apple-touch-icon" href="{{ '../' if es_historico else '' }}icono.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
