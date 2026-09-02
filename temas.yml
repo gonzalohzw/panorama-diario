@@ -1,0 +1,195 @@
+# ============================================================================
+# TEMAS DEL PANORAMA
+#
+# Este es el ÚNICO archivo que necesitás editar para cambiar qué noticias
+# aparecen. Guardalo y al día siguiente el panorama sale con los cambios.
+#
+# Cómo funciona cada categoría:
+#   - id:        nombre interno, en minúscula y sin espacios (no lo ve nadie)
+#   - nombre:    el título que aparece en la página
+#   - busquedas: búsquedas en Google News. Por defecto buscan en español
+#                con región Uruguay. Para buscar en inglés, escribí la
+#                búsqueda así:
+#                    - q: "advertising industry"
+#                      idioma: en
+#   - feeds:     direcciones RSS de medios concretos (opcional). Si un medio
+#                cambia su feed y deja de andar, el panorama sigue igual con
+#                el resto y lo anota al pie de la página.
+#
+# Para DESACTIVAR algo: ponele un # adelante (como la categoría de café
+# del final). Para ACTIVARLO: sacale el #.
+# Consejos de búsqueda: las comillas dobles buscan la frase exacta,
+# OR busca una cosa u otra. Ejemplo: '"inteligencia artificial" OR IA'
+# ============================================================================
+
+titulo: "El Panorama"
+
+# Cuántas horas hacia atrás se consideran "noticia de hoy"
+horas_hacia_atras: 24
+
+# Máximo de notas por categoría (entre 8 y 10 es lo cómodo para leer)
+max_por_categoria: 9
+
+# Máximo de notas de un mismo medio dentro de una categoría (variedad)
+max_por_medio: 2
+
+# Cuántos titulares lleva el bloque "Destacados del día"
+cantidad_destacados: 5
+
+# En cada categoría, cuántos lugares se reservan para los medios elegidos a
+# mano (los "feeds"), que traen imagen y bajada. El resto de los lugares los
+# define la cobertura: cuántos medios distintos hablan de lo mismo.
+min_directas: 3
+
+# Titulares de servicio que no queremos en el panorama. Alcanza con que el
+# titular CONTENGA el texto (se compara sin mayúsculas ni tildes). Agregá o
+# sacá líneas a gusto.
+excluir_titulares:
+  - resultados en vivo
+  - resultado en vivo
+  - live score
+  - live updates
+  - live blog
+  - minuto a minuto
+  - donde ver
+  - a que hora juega
+  - horoscopo
+  - quiniela
+  - loteria
+  - wordle
+  - cartelera
+  - if you invest
+  - what history says
+  - dolar hoy
+  - precio y cotizacion
+  - cotizacion del dolar
+
+categorias:
+
+  - id: marketing
+    nombre: "Marketing y publicidad"
+    busquedas:
+      - q: '"marketing digital" OR publicidad industria'
+      - q: '"campaña publicitaria" OR "campaña de publicidad"'
+      - q: 'redes sociales tendencias contenido'
+      - q: 'advertising industry campaign'
+        idioma: en
+      - q: '"social media" marketing trends'
+        idioma: en
+    feeds:
+      - url: https://www.marketingdirecto.com/feed
+        nombre: Marketing Directo
+      - url: https://www.marketingdive.com/feeds/news
+        nombre: Marketing Dive
+      - url: https://www.adweek.com/feed/
+        nombre: Adweek
+
+  - id: ia-tecnologia
+    nombre: "IA y tecnología"
+    busquedas:
+      - q: '"inteligencia artificial" herramientas'
+      - q: 'IA "creación de contenido" OR IA automatización trabajo'
+      - q: 'OpenAI OR Anthropic OR "Google AI" OR Gemini OR ChatGPT OR Claude'
+        idioma: en
+      - q: 'AI tools content creation'
+        idioma: en
+    feeds:
+      - url: https://www.theverge.com/rss/index.xml
+        nombre: The Verge
+      - url: https://techcrunch.com/feed/
+        nombre: TechCrunch
+      - url: https://feeds.weblogssl.com/xataka2
+        nombre: Xataka
+
+  - id: cine-series
+    nombre: "Cine y series"
+    busquedas:
+      - q: 'estreno película OR cine industria'
+      - q: 'serie temporada OR streaming Netflix OR HBO OR Disney'
+      - q: 'película rodaje director'
+    feeds:
+      - url: https://variety.com/feed/
+        nombre: Variety
+      - url: https://feeds.weblogssl.com/espinof
+        nombre: Espinof
+      - url: https://www.indiewire.com/feed/
+        nombre: IndieWire
+
+  - id: musica
+    nombre: "Música"
+    busquedas:
+      - q: 'lanzamiento álbum OR nuevo disco'
+      - q: 'gira conciertos OR "industria musical"'
+      - q: 'Oasis banda'
+      - q: 'Oasis band tour'
+        idioma: en
+    feeds:
+      - url: https://pitchfork.com/rss/news/
+        nombre: Pitchfork
+      - url: https://www.billboard.com/feed/
+        nombre: Billboard
+
+  - id: futbol
+    nombre: "Fútbol"
+    busquedas:
+      - q: '"fútbol uruguayo" OR "campeonato uruguayo"'
+      - q: 'Peñarol OR Nacional fútbol'
+      - q: '"selección uruguaya" OR Uruguay eliminatorias'
+      - q: '"Champions League" OR "fútbol internacional" OR Libertadores'
+    feeds:
+      - url: https://www.espn.com/espn/rss/soccer/news
+        nombre: ESPN Fútbol
+
+  - id: uruguay
+    nombre: "Uruguay"
+    busquedas:
+      - q: 'Uruguay actualidad gobierno OR economía OR sociedad'
+      - q: 'Montevideo OR Uruguay anuncio'
+    feeds:
+      - url: https://ladiaria.com.uy/feeds/articulos
+        nombre: la diaria
+      - url: "https://www.montevideo.com.uy/anxml.aspx?59"
+        nombre: Montevideo Portal
+
+  - id: finanzas
+    nombre: "Finanzas e inversión"
+    busquedas:
+      - q: 'mercados inversión OR "bolsa de valores"'
+      - q: 'economía Uruguay OR "dólar Uruguay"'
+      - q: '"stock market" OR "wall street" OR inflation OR "interest rates"'
+        idioma: en
+    feeds:
+      - url: https://www.cnbc.com/id/100003114/device/rss/rss.html
+        nombre: CNBC
+      - url: https://www.ambito.com/rss/pages/economia.xml
+        nombre: Ámbito
+
+  - id: ciencia
+    nombre: "Ciencia"
+    busquedas:
+      - q: 'descubrimiento científico OR investigación estudio'
+      - q: 'espacio NASA OR astronomía'
+      - q: 'salud avance médico OR medioambiente'
+    feeds:
+      - url: https://www.quantamagazine.org/feed/
+        nombre: Quanta Magazine
+      - url: https://www.sciencedaily.com/rss/all.xml
+        nombre: ScienceDaily
+      - url: https://www.agenciasinc.es/feed
+        nombre: Agencia SINC
+
+  # --------------------------------------------------------------------------
+  # CATEGORÍA OPCIONAL — para activarla, sacale el # a todas estas líneas:
+  # --------------------------------------------------------------------------
+  # - id: cafe-gastronomia
+  #   nombre: "Café y gastronomía"
+  #   busquedas:
+  #     - q: '"café de especialidad" OR cafetería'
+  #     - q: 'gastronomía restaurante Uruguay'
+  #     - q: 'specialty coffee'
+  #       idioma: en
+  #   feeds:
+  #     - url: https://www.perfectdailygrind.com/feed/
+  #       nombre: Perfect Daily Grind
+  #     - url: https://sprudge.com/feed
+  #       nombre: Sprudge

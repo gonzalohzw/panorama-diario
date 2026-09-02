@@ -1,0 +1,43 @@
+# La alarma diaria: GitHub ejecuta esto solo, todos los días.
+#
+# El horario va en UTC. Uruguay es UTC-3 todo el año, así que:
+#     "15 9 * * *"  =  6:15 de la mañana en Montevideo
+# Ojo: GitHub puede arrancar hasta 20-40 minutos más tarde de lo programado.
+# Para cambiar el horario, editá solo la línea del cron (guía en el README).
+
+name: Panorama diario
+
+on:
+  schedule:
+    - cron: "15 9 * * *"
+  workflow_dispatch: {}   # permite dispararlo a mano con un botón
+
+permissions:
+  contents: write
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Traer el proyecto
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Generar el panorama
+        run: python generar.py
+
+      - name: Publicar la página
+        run: |
+          git config user.name "panorama-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/
+          git diff --cached --quiet && echo "Sin cambios que publicar" && exit 0
+          git commit -m "Panorama del $(date -u +%F)"
+          git push

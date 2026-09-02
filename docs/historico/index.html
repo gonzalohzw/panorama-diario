@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F2F2F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#030826" media="(prefers-color-scheme: dark)">
+<title>El Panorama — días anteriores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  /* Estructura original, estética Goyete — ver plantilla.html */
+  :root {
+    --fondo: #F2F2F2; --tarjeta: #ffffff; --tinta: #030826;
+    --tinta-suave: #4A5573; --borde: #E0E0E0;
+    --acento: #F14C4B; --acento-texto: #C93938;
+    --grilla: rgba(3, 8, 38, .05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #030826; --tarjeta: #0C1132; --tinta: #F2F2F2;
+      --tinta-suave: #7A8FB5; --borde: #1D2347;
+      --acento: #F14C4B; --acento-texto: #F4706F;
+      --grilla: rgba(255, 255, 255, .035);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--fondo);
+    background-image:
+      linear-gradient(var(--grilla) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grilla) 1px, transparent 1px);
+    background-size: 72px 72px;
+    color: var(--tinta);
+    font-family: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 30px 18px 60px; max-width: 560px; margin: 0 auto;
+  }
+  .marca {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 30px; font-weight: 700; text-align: center;
+  }
+  .marca span { color: var(--acento); }
+  p.sub { text-align: center; color: var(--tinta-suave); margin: 4px 0 26px; font-size: 14px; }
+  ul { list-style: none; }
+  li a {
+    display: block; background: var(--tarjeta); border: 1px solid var(--borde);
+    border-radius: 12px; padding: 13px 17px; margin-bottom: 9px;
+    color: inherit; text-decoration: none; font-weight: 600; font-size: 15.5px;
+  }
+  li a:hover { border-color: var(--acento); color: var(--acento-texto); }
+  .volver { display: block; text-align: center; margin-top: 24px; color: var(--acento-texto); font-weight: 600; font-size: 14px; }
+</style>
+</head>
+<body>
+  <div class="marca">El Panorama<span>.</span></div>
+  <p class="sub">Días anteriores</p>
+  <ul>
+    <li><a href="2026-09-02.html">Miércoles 2 de septiembre de 2026</a></li>
+  </ul>
+  <a class="volver" href="../index.html">← Panorama de hoy</a>
+</body>
+</html>
