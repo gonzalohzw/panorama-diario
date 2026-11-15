@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F2F2F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#030826" media="(prefers-color-scheme: dark)">
+<title>El Panorama — 15/11/2026</title>
+<link rel="icon" type="image/png" href="../icono.png">
+<link rel="apple-touch-icon" href="../icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* Estructura original del panorama, con la estética de Goyete (goyete.uy):
+     azul noche + coral + azul acero, Playfair Display donde va serif y
+     Lexend donde va sans. Modo claro = la misma paleta en papel. */
+  :root {
+    --fondo: #F2F2F2;
+    --tarjeta: #ffffff;
+    --tinta: #030826;
+    --tinta-suave: #4A5573;
+    --borde: #E0E0E0;
+    --acento: #F14C4B;
+    --acento-texto: #C93938;
+    --acento-suave: rgba(241, 76, 75, .10);
+    --grilla: rgba(3, 8, 38, .05);
+    --sombra: 0 1px 3px rgba(3, 8, 38, .06), 0 4px 14px rgba(3, 8, 38, .05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #030826;
+      --tarjeta: #0C1132;
+      --tinta: #F2F2F2;
+      --tinta-suave: #7A8FB5;
+      --borde: #1D2347;
+      --acento: #F14C4B;
+      --acento-texto: #F4706F;
+      --acento-suave: rgba(241, 76, 75, .14);
+      --grilla: rgba(255, 255, 255, .035);
+      --sombra: 0 1px 3px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--fondo);
+    background-image:
+      linear-gradient(var(--grilla) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grilla) 1px, transparent 1px);
+    background-size: 72px 72px;
+    color: var(--tinta);
+    font-family: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .cabecera { padding: 26px 18px 14px; text-align: center; }
+  .marca {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 34px; font-weight: 700; letter-spacing: -.5px;
+  }
+  .marca span { color: var(--acento); }
+  .fecha-dia {
+    margin-top: 4px; color: var(--tinta-suave);
+    font-size: 14px;
+  }
+  .aviso-historico {
+    margin: 10px auto 0; display: inline-block;
+    background: var(--acento-suave); color: var(--acento-texto);
+    padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  }
+  .aviso-historico a { text-decoration: underline; }
+
+  nav.chips {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; gap: 8px; overflow-x: auto;
+    padding: 10px 18px;
+    background: color-mix(in srgb, var(--fondo) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borde);
+    scrollbar-width: none;
+  }
+  nav.chips::-webkit-scrollbar { display: none; }
+  nav.chips a {
+    flex: 0 0 auto;
+    padding: 7px 14px; border-radius: 999px;
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    font-size: 13.5px; font-weight: 600; color: var(--tinta-suave);
+    transition: all .15s;
+  }
+  nav.chips a.activo, nav.chips a:hover {
+    background: var(--acento); border-color: var(--acento); color: #fff;
+  }
+
+  main { max-width: 1080px; margin: 0 auto; padding: 22px 18px 40px; }
+
+  section { scroll-margin-top: 64px; margin-bottom: 38px; }
+  h2 {
+    font-size: 21px; font-weight: 800; letter-spacing: -.3px;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  h2::before {
+    content: ""; width: 5px; height: 22px; border-radius: 3px;
+    background: var(--acento); flex: 0 0 auto;
+  }
+
+  .editorial {
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    border-left: 4px solid var(--acento);
+    border-radius: 14px; padding: 16px 18px; margin-bottom: 26px;
+    font-size: 16.5px; line-height: 1.55;
+  }
+
+  .destacados ol { list-style: none; counter-reset: destacado; }
+  .destacados li { counter-increment: destacado; }
+  .destacados a {
+    display: grid; grid-template-columns: 44px 1fr; gap: 12px;
+    align-items: baseline;
+    padding: 13px 6px; border-bottom: 1px solid var(--borde);
+  }
+  .destacados li:last-child a { border-bottom: none; }
+  .destacados a::before {
+    content: counter(destacado);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--acento); text-align: center; line-height: 1;
+  }
+  .destacados .titular { font-size: 17px; font-weight: 700; line-height: 1.3; display: block; }
+  .destacados .meta { margin-top: 4px; }
+
+  .tarjetas { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 640px)  { .tarjetas { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 980px)  { .tarjetas { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .tarjeta {
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    border-radius: 14px; overflow: hidden; box-shadow: var(--sombra);
+    transition: transform .15s;
+  }
+  @media (hover: hover) { .tarjeta:hover { transform: translateY(-2px); } }
+  .tarjeta img {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+    background: var(--borde);
+  }
+  .tarjeta .cuerpo { padding: 13px 15px 15px; }
+  .tarjeta h3 { font-size: 16px; font-weight: 600; line-height: 1.32; }
+  .tarjeta p { margin-top: 6px; font-size: 14px; font-weight: 300; color: var(--tinta-suave); }
+  .resumen-ia {
+    margin-top: 8px; padding: 8px 10px; border-radius: 8px;
+    background: var(--acento-suave); font-size: 13.5px;
+  }
+  .meta {
+    margin-top: 9px; font-size: 12.5px; color: var(--tinta-suave);
+    display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center;
+  }
+  .meta b { color: var(--acento-texto); font-weight: 600; }
+  .cobertura {
+    background: var(--acento-suave); color: var(--acento-texto);
+    border-radius: 999px; padding: 1.5px 8px; font-weight: 600; font-size: 11.5px;
+  }
+  .vacio { color: var(--tinta-suave); font-size: 14.5px; padding: 4px 2px; }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 22px 18px 46px; text-align: center;
+    color: var(--tinta-suave); font-size: 13px; line-height: 1.7;
+  }
+  footer a { color: var(--acento-texto); font-weight: 600; }
+  .fallidas { font-size: 12px; max-width: 640px; margin: 8px auto 0; }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="marca">El Panorama<span>.</span></div>
+  <div class="fecha-dia">Domingo 15 de noviembre de 2026</div>
+  
+  <div class="aviso-historico">
+    Panorama del 15/11/2026 · <a href="../index.html">volver a hoy</a>
+  </div>
+  
+</header>
+
+<nav class="chips" id="chips">
+  <a href="#destacados" class="activo">Destacados</a>
+  
+  <a href="#marketing">Marketing y publicidad</a>
+  
+  <a href="#ia-tecnologia">IA y tecnología</a>
+  
+  <a href="#cine-series">Cine y series</a>
+  
+  <a href="#musica">Música</a>
+  
+  <a href="#futbol">Fútbol</a>
+  
+  <a href="#uruguay">Uruguay</a>
+  
+  <a href="#finanzas">Finanzas e inversión</a>
+  
+  <a href="#ciencia">Ciencia</a>
+  
+</nav>
+
+<main>
+
+
+
+<section id="destacados" class="destacados">
+  <h2>Destacados del día</h2>
+  <ol>
+    
+    <li>
+      <a href="https://www.indiewire.com/news/box-office/box-office-ebenezer-opens-20-million-johnny-depp-comeback-1235228068/" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">Box Office: ‘Ebenezer’ Opens to Modest $19 Million, Showing Johnny Depp Is Still a Draw For the Right Price</span>
+          <span class="meta"><b>IndieWire</b> · 13:16 · Cine y series
+            
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://www.montevideo.com.uy/auc.aspx?982299" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">Justicia desestimó millonaria demanda de Luisana Lopilato por un comercial en Uruguay</span>
+          <span class="meta"><b>Montevideo Portal</b> · 13:09 · Uruguay
+            
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://www.xataka.com/ecologia-y-naturaleza/2010-vimos-avispa-rara-pueblo-navarra-hoy-velutinas-ocupan-18-espana-peninsular" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">En 2010 vimos una avispa rara en este idílico pueblo de Navarra. Hoy las velutinas ya ocupan el 18% de la España peninsular</span>
+          <span class="meta"><b>Xataka</b> · 13:01 · IA y tecnología
+            
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://www.theverge.com/entertainment/1033895/rachelle-hampton-normal-gossip-interview" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">Rachelle Hampton won’t admit how long she spent charting the use of ‘murmur’ in Twilight</span>
+          <span class="meta"><b>The Verge</b> · 13:00 · IA y tecnología
+            
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://www.espinof.com/reality/operacion-triunfo-corea-amano-votos-ganaran-concursantes-que-cadena-queria-no-tuvieron-cuenta-poder-k-popers" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">El &#39;Operación Triunfo&#39; de Corea amañó los votos para que ganaran los concursantes que la cadena quería. No tuvieron en cuenta el poder de las K-Popers</span>
+          <span class="meta"><b>Espinof</b> · 12:31 · Cine y series
+            
+          </span>
+        </span>
+      </a>
+    </li>
+    
+  </ol>
+</section>
+
+
+<section id="marketing">
+  <h2>Marketing y publicidad</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.marketingdirecto.com/anunciantes-general/sony-recupera-auriculares-primer-walkman-50-anos-despues" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Sony recupera los auriculares del primer Walkman casi 50 años después</h3>
+          <p>Los nuevos MDR-3R conservan la estética de los auriculares originales de 1979 y se adaptan a los dispositivos actuales, con una edición especial de Stranger Things. La entrada Sony recupera los auriculares del primer…</p>
+          
+          <div class="meta"><b>Marketing Directo</b> · 08:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.marketingdirecto.com/creacion/campanas-de-marketing/tienda-sueca-acepta-pagos-mal-aliento-cambio-productos-higiene-bucal" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Esta tienda sueca acepta pagos con mal aliento a cambio de productos de higiene bucal</h3>
+          <p>The Humble Co. abre The Breath Boutique en Estocolmo, una tienda donde se puede pagar productos de higiene bucal con su mal aliento. La entrada Esta tienda sueca acepta pagos con mal aliento a cambio de productos de…</p>
+          
+          <div class="meta"><b>Marketing Directo</b> · 06:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="ia-tecnologia">
+  <h2>IA y tecnología</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.xataka.com/ecologia-y-naturaleza/2010-vimos-avispa-rara-pueblo-navarra-hoy-velutinas-ocupan-18-espana-peninsular" target="_blank" rel="noopener">
+        <img src="https://i.blogs.es/68c933/manuel-torres-garcia-mbyzhfay8be-unsplash/1024_2000.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>En 2010 vimos una avispa rara en este idílico pueblo de Navarra. Hoy las velutinas ya ocupan el 18% de la España peninsular</h3>
+          <p>Es 5 de enero de 2019. De noche. Un equipo baja un nido de avispas asiáticas de un sauce blanco en Nigrán (Pontevedra). Está a 12 metros del suelo y en él vivían 1979 avispas velutinas, sin contar los huevos . Era una…</p>
+          
+          <div class="meta"><b>Xataka</b> · 13:01
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.theverge.com/entertainment/1033895/rachelle-hampton-normal-gossip-interview" target="_blank" rel="noopener">
+        <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/hampton-headshot-2.jpg?quality=90&amp;#038;strip=all&amp;#038;crop=0,0,100,100" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Rachelle Hampton won’t admit how long she spent charting the use of ‘murmur’ in Twilight</h3>
+          <p>Rachelle Hampton is a writer and co-owner at Defector Media, and the host of Normal Gossip, a podcast of anonymous listener-submitted stories about everyday drama. Whether that&#39;s lies about luxury wool in a literal…</p>
+          
+          <div class="meta"><b>The Verge</b> · 13:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://techcrunch.com/2026/11/15/the-tech-products-we-enthusiastically-recommend-this-holiday-season/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>The tech products we enthusiastically recommend this holiday season</h3>
+          <p>We&#39;ve been reviewing a bunch of new gadgets at TechCrunch this year, and we have some clear favorites to share for your Black Friday shopping and beyond.</p>
+          
+          <div class="meta"><b>TechCrunch</b> · 13:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.xataka.com/medicina-y-salud/chuleton-lentejas-estudio-finlandes-relaciona-proteina-vegetal-niveles-altos-testosterona" target="_blank" rel="noopener">
+        <img src="https://i.blogs.es/eb0cb7/lentejas/1024_2000.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Menos chuletón, más lentejas: un estudio finlandés relaciona la proteína vegetal con niveles más altos de testosterona</h3>
+          <p>El imaginario tradicional relaciona la testosterona con hombres muy viriles y a esos hombres viriles los asocia mucho más con un buen chuletón que con un plato de lentejas. Sin embargo, según un estudio publicado…</p>
+          
+          <div class="meta"><b>Xataka</b> · 12:31
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.theverge.com/gadgets/1033432/lg-b6e-oled-tv-best-buy-doorbuster-black-friday-2026-deal-sale" target="_blank" rel="noopener">
+        <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/lg-oled-b6e-2026.png?quality=90&amp;#038;strip=all&amp;#038;crop=0,0,100,100" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>LG’s budget-friendly B6E OLED TV is up to 50 percent off this weekend</h3>
+          <p>LG’s B6E was already one of the most affordable OLED TVs you could buy, but it’s an even better deal now that it’s included as part of Best Buy’s latest doorbuster event. Now through the end of today, November 15th, the…</p>
+          
+          <div class="meta"><b>The Verge</b> · 11:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://techcrunch.com/2026/11/14/where-was-nvidias-security-team/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Where was Nvidia’s security team?</h3>
+          <p>Nvidia’s security chief quietly left in August, and now that CEO Jensen Huang has stepped down over his relationships, including one with an executive at a company suspected of funneling chips to China, a former…</p>
+          
+          <div class="meta"><b>TechCrunch</b> · ayer 21:08
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="cine-series">
+  <h2>Cine y series</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.indiewire.com/news/box-office/box-office-ebenezer-opens-20-million-johnny-depp-comeback-1235228068/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Box Office: ‘Ebenezer’ Opens to Modest $19 Million, Showing Johnny Depp Is Still a Draw For the Right Price</h3>
+          <p>The star emerged from his decade in the wilderness to post a respectable opening for his Christmas film.</p>
+          
+          <div class="meta"><b>IndieWire</b> · 13:16
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.espinof.com/reality/operacion-triunfo-corea-amano-votos-ganaran-concursantes-que-cadena-queria-no-tuvieron-cuenta-poder-k-popers" target="_blank" rel="noopener">
+        <img src="https://i.blogs.es/e7f300/produce/1024_2000.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>El &#39;Operación Triunfo&#39; de Corea amañó los votos para que ganaran los concursantes que la cadena quería. No tuvieron en cuenta el poder de las K-Popers</h3>
+          <p>Si algún día tienes la infinita suerte de ir a Corea del Sur, comprobarás que lo de la fama del K-Pop no es una cosa que nos hayamos inventado en occidente: no solo hay gigantescas tiendas de varios pisos donde…</p>
+          
+          <div class="meta"><b>Espinof</b> · 12:31
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://variety.com/2026/shopping/news/how-to-watch-billy-evans-cbs-interview-online-1236948056/" target="_blank" rel="noopener">
+        <img src="https://variety.com/wp-content/uploads/2026/11/GettyImages-1248465318.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>How to Watch Billy Evans’ First TV Interview About ‘You Can See Everything’ Online</h3>
+          <p>Billy Evans is speaking out about his portrayal in Nathan Fielder and Lance Oppenheim’s hit documentary “You Can See Everything.” The longtime partner of disgraced Theranos founder Elizabeth Holmes sits down with CBS…</p>
+          
+          <div class="meta"><b>Variety</b> · 11:56
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.espinof.com/directores-y-guionistas/momento-carrera-orson-welles-anuncio-champan-que-hizo-completamente-borracho" target="_blank" rel="noopener">
+        <img src="https://i.blogs.es/b42de2/welles/1024_2000.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Es, sencillamente, el momento más bajo en toda la carrera de Orson Welles: el anuncio de champán que hizo estando muy perjudicado</h3>
+          <p>Orson Welles era un auténtico genio. Nadie puede siquiera dudar de ello: tras &#39;Ciudadano Kane&#39; , &#39;La dama de Shanghai&#39; , &#39;Sed de mal&#39; (&#39;Touch of evil&#39;) o &#39;Fraude&#39; (&#39;F for Fake&#39;) pasó con letras de oro a la historia del…</p>
+          
+          <div class="meta"><b>Espinof</b> · 11:01
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://variety.com/2026/film/global/thessaloniki-awards-a-day-in-the-life-of-jo-wins-1236948029/" target="_blank" rel="noopener">
+        <img src="https://variety.com/wp-content/uploads/2026/11/MixCollage-14-Nov-2026-12-56-PM-945_1c3c47.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Thessaloniki Awards: Jacqueline Lentzou’s ‘A Day in the Life of Jo: Chapter Phaedra’ Wins the Golden Alexander</h3>
+          <p>Jacqueline Lentzou’s “A Day in the Life of Jo: Chapter Phaedra” won the top prize Sunday at the Thessaloniki Film Festival, taking home the Golden Alexander for best feature film in the Arrivals international…</p>
+          
+          <div class="meta"><b>Variety</b> · 10:45
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.indiewire.com/news/festivals/toruncamerimage-golden-frog-winners-2026-1235227760/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>‘Fatherland’ Wins Golden Frog at ToruńCAMERIMAGE 2026 — Full Winners List</h3>
+          <p>The Polish festival is all about cinematography, making its Golden Frog award a coveted honor for DPs.</p>
+          
+          <div class="meta"><b>IndieWire</b> · ayer 15:51
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="musica">
+  <h2>Música</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.billboard.com/culture/product-recommendations/best-buy-gift-guide-tech-sony-hp-amazon-shop-online-1236371993/" target="_blank" rel="noopener">
+        <img src="https://www.billboard.com/wp-content/uploads/2026/11/Best-Buy-Spn-Con-Sony-ZV-1F-Compact-Digital-Camera-BB-Embed.jpg?w=900&amp;#038;h=454&amp;#038;crop=1" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Best Buy Gift Guide 2026: Best Tech Gifts From Sony, Sennheiser, HP and Amazon to Shop Online</h3>
+          <p>Best Buy is the retailer of choice for tech gifts for the holidays.</p>
+          
+          <div class="meta"><b>Billboard</b> · 12:30
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://pitchfork.com/story/watch-st-vincent-metallica-more-cover-iron-maiden-at-rock-and-roll-hall-of-fame-2026-induction-ceremony/" target="_blank" rel="noopener">
+        <img src="https://media.pitchfork.com/photos/6af9c7337b1affb62d7f5343/master/pass/GettyImages-2305186486.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Watch St. Vincent, Metallica, More Cover Iron Maiden at Rock &amp; Roll Hall of Fame 2026 Induction Ceremony</h3>
+          <p>Rage Against the Machine’s Brad Wilk, Mötley Crüe’s John 5, and Jack Black joined the all-star lineup to perform “The Trooper”</p>
+          
+          <div class="meta"><b>Pitchfork</b> · 12:11
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.billboard.com/culture/product-recommendations/nfl-munich-game-cage-the-elephant-halftime-watch-live-free-1236380798/" target="_blank" rel="noopener">
+        <img src="https://www.billboard.com/wp-content/uploads/2024/11/directv-stream.png?w=512&amp;amp;h=512&amp;amp;crop=1" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>NFL Munich Game Halftime Show 2026: Here’s Where to Watch Cage The Elephant Perform Live Online Free</h3>
+          <p>Livestream the New England Patriots taking on the Detroit Lions live from Munich on Nov. 15. Watch Cage the Elephant perform at halftime.</p>
+          
+          <div class="meta"><b>Billboard</b> · 08:30
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="futbol">
+  <h2>Fútbol</h2>
+  
+  <p class="vacio">Hoy no entraron notas en esta categoría.</p>
+  
+</section>
+
+<section id="uruguay">
+  <h2>Uruguay</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.montevideo.com.uy/auc.aspx?982299" target="_blank" rel="noopener">
+        <img src="https://imagenes.montevideo.com.uy/imgnoticias/202611/_W620/979107.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Justicia desestimó millonaria demanda de Luisana Lopilato por un comercial en Uruguay</h3>
+          <p>La actriz argentina reclamaba más de US$ 2 millones por el uso de su imagen en una publicidad de una empresa de alarmas de Maldonado. La actriz argentina reclamaba más de US$ 2 millones por el uso de su imagen en una…</p>
+          
+          <div class="meta"><b>Montevideo Portal</b> · 13:09
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.montevideo.com.uy/auc.aspx?982062" target="_blank" rel="noopener">
+        <img src="https://imagenes.montevideo.com.uy/imgnoticias/202611/_W620/978806.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>“La dificultad es la nafta”: Carlos, el colombiano que recorre Uruguay en un Fusca</h3>
+          <p>Moreno salió de Bogotá hace tres años, llegó hasta Ushuaia con su perra Hany y sueña con llevar su auto de 1966 a Europa. Moreno salió de Bogotá hace tres años, llegó hasta Ushuaia con su perra Hany y sueña con llevar…</p>
+          
+          <div class="meta"><b>Montevideo Portal</b> · 12:20
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://ladiaria.com.uy/opinion/articulo/2026/11/hacer-prevalecer-la-voluntad-popular/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Hacer prevalecer la voluntad popular</h3>
+          <p>Para tirar el penal, primero hay que hacer el cuadro de la situación: el arquero, el sol, el viento. En el método inspirado en Marx, se trata de hacer el cuadro de la coyuntura. Lo que Lenin llamaba el &#34;análisis del…</p>
+          
+          <div class="meta"><b>la diaria</b> · 11:13
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://ladiaria.com.uy/deporte/articulo/2026/11/nacional-y-albion-empataron-1-1-en-el-gran-parque-central/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Nacional y Albion empataron 1-1 en el Gran Parque Central</h3>
+          <p>El conjunto tricolor queda con pocas chances de pelear el Clausura. Sin público tricolor en el Gran Parque Central, Nacional y Albion sellaron este sábado un justo empate que deja al equipo de Daniel Carreño un tanto…</p>
+          
+          <div class="meta"><b>la diaria</b> · ayer 22:34
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="finanzas">
+  <h2>Finanzas e inversión</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.cnbc.com/investingclub/2026/11/15/3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.html" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>3 big things we&#39;re watching in the stock market in the week ahead</h3>
+          <p>Nvidia and Anthropic will share the spotlight in a pivotal week for the AI trade.</p>
+          
+          <div class="meta"><b>CNBC</b> · 12:26
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.ambito.com/economia/miguel-kiguel-advirtio-que-el-gobierno-subestimo-la-inflacion-y-pidio-priorizar-la-actividad-economica-y-el-empleo-n6345408" target="_blank" rel="noopener">
+        <img src="https://media.ambito.com/p/7020c69d912e9aba6597bbe5a98be81d/adjuntos/239/imagenes/043/003/0043003940/miguel-kiguel.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Miguel Kiguel advirtió que el Gobierno subestimó la inflación y pidió priorizar la actividad económica y el empleo</h3>
+          <p>El economista y director de EconViews sostuvo que la inflación presenta una fuerte inercia que dificulta su desaceleración. Además, planteó dudas sobre las prioridades económicas del Gobierno de Javier Milei y advirtió…</p>
+          
+          <div class="meta"><b>Ámbito</b> · 11:53
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.cnbc.com/2026/11/15/social-security-tax-changes-midterm-election.html" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Social Security and the blue wave: What could happen to payroll taxes and senior tax breaks</h3>
+          <p>Democrats advocated taxing high earners to shore up Social Security in the runup to the midterms. Plus, a senior deduction is slated to expire in two years.</p>
+          
+          <div class="meta"><b>CNBC</b> · 11:30
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.ambito.com/economia/plazo-fijo-cuanto-hay-que-invertir-ganar-250000-n6344756" target="_blank" rel="noopener">
+        <img src="https://media.ambito.com/p/8ee693cc45f88beb4a2b19a9654c9134/adjuntos/239/imagenes/043/526/0043526968/arca-calculo-tramite-monotributo.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Plazo fijo: cuánto hay que invertir para ganar $250.000</h3>
+          <p>Las entidades financieras ofrecen diferentes tasas para los depósitos en pesos. El simulador del Banco Nación te ayuda a evaluar una inversión a corto plazo.</p>
+          
+          <div class="meta"><b>Ámbito</b> · 11:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="ciencia">
+  <h2>Ciencia</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.sciencedaily.com/releases/2026/11/261114202236.htm" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Vitamin C could help block cancer-linked chemicals in your stomach, study finds</h3>
+          <p>Scientists have discovered that vitamin C may help prevent potentially cancer-causing chemicals from forming in the stomach after eating foods containing nitrates and nitrites. A new mathematical model suggests that…</p>
+          
+          <div class="meta"><b>ScienceDaily</b> · 11:13
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.sciencedaily.com/releases/2026/11/261113232105.htm" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>A common osteoporosis drug blocked spinal damage in a surprising new study</h3>
+          <p>Scientists have uncovered a surprising genetic connection to spinal degeneration and found that an existing osteoporosis drug can prevent damaging mineral buildup in zebrafish spines. The discovery could pave the way…</p>
+          
+          <div class="meta"><b>ScienceDaily</b> · 11:03
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+
+</main>
+
+<footer>
+  <div>Generado el domingo 15 de noviembre de 2026, 13:20 (hora Uruguay)</div>
+  <div>
+    
+    <a href="index.html">Otros días</a> · <a href="../index.html">Panorama de hoy</a>
+    
+  </div>
+  
+  <div class="fallidas">Fuentes que hoy no respondieron: Google News «advertising industry campaign» (Marketing y publicidad) · Google News «AI tools content creation» (IA y tecnología) · Google News «OpenAI OR Anthropic OR &#34;Google AI&#34; OR Gemini OR ChatGPT OR Claude» (IA y tecnología) · Google News «IA &#34;creación de contenido&#34; OR IA automatización trabajo» (IA y tecnología) · Google News «&#34;inteligencia artificial&#34; herramientas» (IA y tecnología) · Google News «estreno película OR cine industria» (Cine y series) · Google News «&#34;campaña publicitaria&#34; OR &#34;campaña de publicidad&#34;» (Marketing y publicidad) · Google News «redes sociales tendencias contenido» (Marketing y publicidad) · Google News «&#34;marketing digital&#34; OR publicidad industria» (Marketing y publicidad) · Google News «&#34;social media&#34; marketing trends» (Marketing y publicidad) · Google News «película rodaje director» (Cine y series) · Google News «Oasis banda» (Música) · Google News «lanzamiento álbum OR nuevo disco» (Música) · Google News «Peñarol OR Nacional fútbol» (Fútbol) · Google News «serie temporada OR streaming Netflix OR HBO OR Disney» (Cine y series) · Google News «gira conciertos OR &#34;industria musical&#34;» (Música) · Google News «Oasis band tour» (Música) · Google News «&#34;selección uruguaya&#34; OR Uruguay eliminatorias» (Fútbol) · Google News «&#34;Champions League&#34; OR &#34;fútbol internacional&#34; OR Libertadores» (Fútbol) · Google News «&#34;fútbol uruguayo&#34; OR &#34;campeonato uruguayo&#34;» (Fútbol) · Agencia SINC (Ciencia) · Google News «Montevideo OR Uruguay anuncio» (Uruguay) · Google News «Uruguay actualidad gobierno OR economía OR sociedad» (Uruguay) · Google News «mercados inversión OR &#34;bolsa de valores&#34;» (Finanzas e inversión) · Google News «salud avance médico OR medioambiente» (Ciencia) · Google News «&#34;stock market&#34; OR &#34;wall street&#34; OR inflation OR &#34;interest rates&#34;» (Finanzas e inversión) · Google News «espacio NASA OR astronomía» (Ciencia) · Google News «economía Uruguay OR &#34;dólar Uruguay&#34;» (Finanzas e inversión) · Google News «descubrimiento científico OR investigación estudio» (Ciencia)</div>
+  
+</footer>
+
+<script>
+  // Resalta en la barra la categoría que estás leyendo
+  const enlaces = [...document.querySelectorAll("nav.chips a")];
+  const secciones = enlaces
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+  const observador = new IntersectionObserver(entradas => {
+    for (const e of entradas) {
+      if (!e.isIntersecting) continue;
+      enlaces.forEach(a => a.classList.toggle(
+        "activo", a.getAttribute("href") === "#" + e.target.id));
+      const activo = document.querySelector("nav.chips a.activo");
+      if (activo) activo.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    }
+  }, { rootMargin: "-15% 0px -75% 0px" });
+  secciones.forEach(s => observador.observe(s));
+</script>
+
+</body>
+</html>
