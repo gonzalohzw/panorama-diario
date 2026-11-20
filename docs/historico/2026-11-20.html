@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F2F2F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#030826" media="(prefers-color-scheme: dark)">
+<title>El Panorama — 20/11/2026</title>
+<link rel="icon" type="image/png" href="../icono.png">
+<link rel="apple-touch-icon" href="../icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* Estructura original del panorama, con la estética de Goyete (goyete.uy):
+     azul noche + coral + azul acero, Playfair Display donde va serif y
+     Lexend donde va sans. Modo claro = la misma paleta en papel. */
+  :root {
+    --fondo: #F2F2F2;
+    --tarjeta: #ffffff;
+    --tinta: #030826;
+    --tinta-suave: #4A5573;
+    --borde: #E0E0E0;
+    --acento: #F14C4B;
+    --acento-texto: #C93938;
+    --acento-suave: rgba(241, 76, 75, .10);
+    --grilla: rgba(3, 8, 38, .05);
+    --sombra: 0 1px 3px rgba(3, 8, 38, .06), 0 4px 14px rgba(3, 8, 38, .05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo: #030826;
+      --tarjeta: #0C1132;
+      --tinta: #F2F2F2;
+      --tinta-suave: #7A8FB5;
+      --borde: #1D2347;
+      --acento: #F14C4B;
+      --acento-texto: #F4706F;
+      --acento-suave: rgba(241, 76, 75, .14);
+      --grilla: rgba(255, 255, 255, .035);
+      --sombra: 0 1px 3px rgba(0, 0, 0, .5);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--fondo);
+    background-image:
+      linear-gradient(var(--grilla) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grilla) 1px, transparent 1px);
+    background-size: 72px 72px;
+    color: var(--tinta);
+    font-family: "Lexend", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .cabecera { padding: 26px 18px 14px; text-align: center; }
+  .marca {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 34px; font-weight: 700; letter-spacing: -.5px;
+  }
+  .marca span { color: var(--acento); }
+  .fecha-dia {
+    margin-top: 4px; color: var(--tinta-suave);
+    font-size: 14px;
+  }
+  .aviso-historico {
+    margin: 10px auto 0; display: inline-block;
+    background: var(--acento-suave); color: var(--acento-texto);
+    padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  }
+  .aviso-historico a { text-decoration: underline; }
+
+  nav.chips {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; gap: 8px; overflow-x: auto;
+    padding: 10px 18px;
+    background: color-mix(in srgb, var(--fondo) 88%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--borde);
+    scrollbar-width: none;
+  }
+  nav.chips::-webkit-scrollbar { display: none; }
+  nav.chips a {
+    flex: 0 0 auto;
+    padding: 7px 14px; border-radius: 999px;
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    font-size: 13.5px; font-weight: 600; color: var(--tinta-suave);
+    transition: all .15s;
+  }
+  nav.chips a.activo, nav.chips a:hover {
+    background: var(--acento); border-color: var(--acento); color: #fff;
+  }
+
+  main { max-width: 1080px; margin: 0 auto; padding: 22px 18px 40px; }
+
+  section { scroll-margin-top: 64px; margin-bottom: 38px; }
+  h2 {
+    font-size: 21px; font-weight: 800; letter-spacing: -.3px;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  h2::before {
+    content: ""; width: 5px; height: 22px; border-radius: 3px;
+    background: var(--acento); flex: 0 0 auto;
+  }
+
+  .editorial {
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    border-left: 4px solid var(--acento);
+    border-radius: 14px; padding: 16px 18px; margin-bottom: 26px;
+    font-size: 16.5px; line-height: 1.55;
+  }
+
+  .destacados ol { list-style: none; counter-reset: destacado; }
+  .destacados li { counter-increment: destacado; }
+  .destacados a {
+    display: grid; grid-template-columns: 44px 1fr; gap: 12px;
+    align-items: baseline;
+    padding: 13px 6px; border-bottom: 1px solid var(--borde);
+  }
+  .destacados li:last-child a { border-bottom: none; }
+  .destacados a::before {
+    content: counter(destacado);
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 30px; font-weight: 700;
+    color: var(--acento); text-align: center; line-height: 1;
+  }
+  .destacados .titular { font-size: 17px; font-weight: 700; line-height: 1.3; display: block; }
+  .destacados .meta { margin-top: 4px; }
+
+  .tarjetas { display: grid; gap: 14px; grid-template-columns: 1fr; }
+  @media (min-width: 640px)  { .tarjetas { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 980px)  { .tarjetas { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .tarjeta {
+    background: var(--tarjeta); border: 1px solid var(--borde);
+    border-radius: 14px; overflow: hidden; box-shadow: var(--sombra);
+    transition: transform .15s;
+  }
+  @media (hover: hover) { .tarjeta:hover { transform: translateY(-2px); } }
+  .tarjeta img {
+    width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
+    background: var(--borde);
+  }
+  .tarjeta .cuerpo { padding: 13px 15px 15px; }
+  .tarjeta h3 { font-size: 16px; font-weight: 600; line-height: 1.32; }
+  .tarjeta p { margin-top: 6px; font-size: 14px; font-weight: 300; color: var(--tinta-suave); }
+  .resumen-ia {
+    margin-top: 8px; padding: 8px 10px; border-radius: 8px;
+    background: var(--acento-suave); font-size: 13.5px;
+  }
+  .meta {
+    margin-top: 9px; font-size: 12.5px; color: var(--tinta-suave);
+    display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center;
+  }
+  .meta b { color: var(--acento-texto); font-weight: 600; }
+  .cobertura {
+    background: var(--acento-suave); color: var(--acento-texto);
+    border-radius: 999px; padding: 1.5px 8px; font-weight: 600; font-size: 11.5px;
+  }
+  .vacio { color: var(--tinta-suave); font-size: 14.5px; padding: 4px 2px; }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 22px 18px 46px; text-align: center;
+    color: var(--tinta-suave); font-size: 13px; line-height: 1.7;
+  }
+  footer a { color: var(--acento-texto); font-weight: 600; }
+  .fallidas { font-size: 12px; max-width: 640px; margin: 8px auto 0; }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="marca">El Panorama<span>.</span></div>
+  <div class="fecha-dia">Viernes 20 de noviembre de 2026</div>
+  
+  <div class="aviso-historico">
+    Panorama del 20/11/2026 · <a href="../index.html">volver a hoy</a>
+  </div>
+  
+</header>
+
+<nav class="chips" id="chips">
+  <a href="#destacados" class="activo">Destacados</a>
+  
+  <a href="#marketing">Marketing y publicidad</a>
+  
+  <a href="#ia-tecnologia">IA y tecnología</a>
+  
+  <a href="#cine-series">Cine y series</a>
+  
+  <a href="#musica">Música</a>
+  
+  <a href="#futbol">Fútbol</a>
+  
+  <a href="#uruguay">Uruguay</a>
+  
+  <a href="#finanzas">Finanzas e inversión</a>
+  
+  <a href="#ciencia">Ciencia</a>
+  
+</nav>
+
+<main>
+
+
+
+<section id="destacados" class="destacados">
+  <h2>Destacados del día</h2>
+  <ol>
+    
+    <li>
+      <a href="https://news.google.com/rss/articles/CBMilwJBVV95cUxNWE5BRnR0Z015OU4xeGZwSlFjRFVnNWxKdkMydFBsWXl2eEUxX2wzUVlzT0VKbWRjNXJnM3I5a3Ztb1FVMmRJc21DR2l1dzI2UFZxVEZpOGV6cUQ4S2hTZTMwbndxdGhIeERSZ1BTYkUxWkZ3SnktTmI2d3JzQThjWlBFcVVkODU2eUVfMTl0YTdYcnNGS2NRY0lXNXV0VGFwV2lwaFlubG9hckhLbEJpem80bnJSbVhiaW9YOGVqSEtoZzVlVDlhMmt6QmtlZ0R2MUVrU0NPQ0l2c19xTV9LR1lRTTNYVmpxUUhqMjJManVnWTlWSFhGRFNHZlkwME9JbXVUanZvWDd5dDJFaDNOaFQ4MVNwaXPSAasCQVVfeXFMTnNfbF9uLVh3czdQYjNlTVFoSG05QjJBSXpyOEFmNFktcnZNbFFYZTJicEtUM09qeTJvcVVVY2kxWVJOUDF2b3p6UVlBOTV1ZEhSREJKbzhhQWgzNGpiak1hdjFjb2dkXzhZNDlVMXN3cUdzeXR0eWh1aGsxVEpaMkF6bzB0UjRUcVhWMVk1SG5JY3U0U19jbEpKMEpkSVBaVGUyYTFQclFxeWZ6bHloT0kwandVcnU1bEVodEFCXzhDdUF1YlhnVktZMUMxS0s0akwxaHNXVnA5cnlpMDAwT2J4WjhVWlBfcmNZODVyQjNIWU4tbU10U25JVlRMRWE2WXZIUi05RVNfVzZOQjlzeW5rUFQtV0VqUHpiVVNtV3dzY213M2g1SWNfMXc?oc=5" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">Copa Libertadores: Por primera vez la final tendrá show musical en el entretiempo</span>
+          <span class="meta"><b>El Comercio Perú</b> · 14:05 · Fútbol
+            <span class="cobertura">7 medios</span>
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE9hSUF6R3ZPWmcyQnZqM0pMTkQ4T2o5OGZabVlwTGhoU0p0bUtSS292NGlJZngxZklpQy1BbmJDRDkyT1hTVUVJUEI3UzAxcE1KMmRTem5pbFVBMEk2M1NpRFJ3?oc=5" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">La Edad Dorada tendrá temporada 5: HBO renueva la serie de Julian Fellowes</span>
+          <span class="meta"><b>Spoiler.mx</b> · 12:52 · Cine y series
+            <span class="cobertura">4 medios</span>
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPcmpNQkRYVzBIX3hJbjY0YnpFQUNRVVVvLWIySHByay1NSlhyWXJsMWtGLWVtdGt0bVBKN0JNQ2RodFppdEdiSjY5Y3VQTjAxR0Z6XzA4VFEwcnNPZk0yelQ0QTM2cEkzanl2NFllSl9LeUNOaDdGWWpJTkx1MzY5UnVLQkdLajEtTEpnaktiSl9NZlhKWTBxMtIBswFBVV95cUxNalRSN0d3cE9TaGlmNm1iREp1N1QyVklhaERfUjl0eEN4ZlhjaEJPcFFGcXpweHBLSU0tdnhTcUdRWTF3VEtmNTdYbno4UV9VNHY3NS1TR21KT0w2VVFwaHFFYWNvVmh3V2tfWm9GTVd0T01BZmhEemZZNDd2Q3VMWmEzRlZ6VUcwUUxqZFNoMXBVMUpoc3h6aDR5MEFobU1GVlN2ZHhoeEtpMGIzNXhockdyYw?oc=5" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">Uruguay colocó deuda por 1.250 millones de euros</span>
+          <span class="meta"><b>El Cronista</b> · 11:16 · Finanzas e inversión
+            <span class="cobertura">4 medios</span>
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFA2bEFiTU1HYXRDM1N3eGl5NUZ5VW5qU3BOUEY1UEFxTld0OVF6Z3hDQkpQTmx5Qjc3bjNxY0I0ckc2azYzRk4zRUQ2Mi1oOXpEX1Z5NnV2OGoteVcxMmlkdTFFT3JHMEFSR0o4?oc=5" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">Analyzing Anthropic&#39;s Wall Street debut</span>
+          <span class="meta"><b>WBUR</b> · 14:06 · IA y tecnología
+            <span class="cobertura">3 medios</span>
+          </span>
+        </span>
+      </a>
+    </li>
+    
+    <li>
+      <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPZGlFc3MtbENNUktZVHZwX1NGYWNGY1JIS2pQTDk0MlA1cldmSzFNcS1ZY1hDdTF0bjNramV0MXB5cDNmZWxTQVRYZlN3aFlVMnMwdFhJNXpCSGd5c1NUZERKZnUySmQxOGU3Ny1fZzJTSzczbXpZT2d4bEtxYTAySkRpTllaWjFZMVk3dE1rTmN5NVJYcG4yYVI5dGpERWVTUDFqZFdnN0tPMktTR1lFaTFKVTVOcG9xcWc?oc=5" target="_blank" rel="noopener">
+        <span>
+          <span class="titular">TikTok lanza herramienta para detectar contenidos creados con inteligencia artificial</span>
+          <span class="meta"><b>7dias.com.do</b> · 14:02 · IA y tecnología
+            <span class="cobertura">3 medios</span>
+          </span>
+        </span>
+      </a>
+    </li>
+    
+  </ol>
+</section>
+
+
+<section id="marketing">
+  <h2>Marketing y publicidad</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://www.marketingdirecto.com/campanas-navidenas/coca-cola-aleja-ia-paladear-tradiciones-clasicas-campana-navidena" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Coca-Cola se aleja de la IA para paladear las tradiciones más clásicas en su nueva campaña navideña</h3>
+          <p>La recién estrenada campaña navideña de Coca-Cola comprende en esta ocasión anuncios donde la IA brilla completamente por su ausencia. La entrada Coca-Cola se aleja de la IA para paladear las tradiciones más clásicas en…</p>
+          
+          <div class="meta"><b>Marketing Directo</b> · 06:33
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.marketingdirecto.com/creacion/campanas-de-marketing/mcdonalds-transforma-iconica-bolsa-papel-practico-babero-libra-churretones" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>McDonald’s transforma su icónica bolsa de papel en un práctico babero que te libra de los churretones</h3>
+          <p>McDonald&#39;s ha rediseñado su clásica bolsa de papel para convertirla en un práctico babero que protege al comensal de eventuales churretones. La entrada McDonald’s transforma su icónica bolsa de papel en un práctico…</p>
+          
+          <div class="meta"><b>Marketing Directo</b> · 10:57
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.adweek.com/tvnewser/tuesday-nov-17-2026-daily-cable-news-ratings/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Tuesday, Nov. 17 Daily Cable News Ratings: Jesse Watters Primetime No.1 in the Demo</h3>
+          <p>Fox News was No.1 across the board.</p>
+          
+          <div class="meta"><b>Adweek</b> · 09:27
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.adweek.com/brand-marketing/metas-holiday-ad-pitches-its-smart-glasses-as-the-secret-to-present-parenting/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Meta’s Holiday Ad Pitches Its Smart Glasses as the Secret to Present Parenting</h3>
+          <p>In Meta&#39;s holiday campaign, the brand has found a new use for its controversial smart glasses: helping parents capture their kids&#39; school holiday plays.</p>
+          
+          <div class="meta"><b>Adweek</b> · 09:21
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxPM0Y3ZGdFd2hRakJIM1BaX1kzN2dHUDJQaXZseElxYmFvX2EtYTVhQ0pudS1WV1NCRHlBQ3RiTmtjTTFVTXNqYXN3QU9CNE5oeFZWaUxoNmtzSENEb2NNTW5IZEtsWHVfQmIxcVNJRHJCSzdyX2NORmFnMEtDZVNCclV6UTExVDNhand5Q3Z6ZWtoUQ?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>AARON Awards Returns for Second Year with SILVERSIDE Co-Founder PJ Pereira as Jury President — LBB - LBB</h3>
+          
+          
+          <div class="meta"><b>LBB - Little Black Book</b> · 14:44
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi9gFBVV95cUxOYUI3MEoyNDljLXJCTmFCVjZOVkFmRnBqOS1saEx2XzF4Z3VReEpSOWI4bGFQMjNtQzdtQjVRMjF4Z2xmWkk2TFBJaUdYVTRSLVV6bzh6YkV4VGV1UTE3Q2JuODNHZ3VFV2tjZWZvSHBDdVBGUUs0eGRqSTlRbmRsMHJGNVBnb2hZODVtUzdWOWw2RFNSNVQwS3c5REVtMXUwejR3MXkyY0FrUGtRNmpUMjJLSERJOVBvN2txNUx3N0xzVldsMW9tempQT1BoeWV4WGM1ZWFwTFJuUndmWmJQc1RwWEJfNUtKRkszME04WG5uRjBTeUHSAfoBQVVfeXFMTWxvQzZiUGlaM2FXODU4bHRheWI4VnE1SzlEVmRHZU1NOEQtUEZEbGhnOERnMWxfbDYyZmlLQ3ZtdmZ3NTBVRFE5eXBlWHVHbmVaYll1bHVTWWZQTlR4ZC04czYteFlyc0dMS3pMUzdnTDJ1R0padmd4YkM2R2YzZUx3VnNQalRDaVRmTWc1a1hVT1NicEFCOG1Ebk12eng0bkNpcVFLMkJhUmtaTXpUc0tqYjIzQ0twYWRqeFF5UDUtY190R1p4NVpjWV81YWpzOFkwNlpVTW05VFk5NFFHNzg0WXVYQXU0WWQ0RWVTYm9LTGt0RjZfcHhvdw?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Gujarat Deputy CM chairs meeting to roll out statewide anti-drug campaign from December 1</h3>
+          
+          
+          <div class="meta"><b>ET Government</b> · 14:37
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxNdi1feERVbzNwaWcwNnJOOWhRN0JiY0IwY2ZFbUw5V3NxRVFQMi04aEVNcExMdzh6UTBObUVKWnFvdDlqbVBBUllud2FGeUNSSFc4SlR3Wi1JWWx6WXVuN3BBbXZoRUw5Z1VsdXREaG9oN1M2UVZ3VWhoUkE5M3dIaEJTR2JKd2laamw0TFY4RjZyTVdZRXBxa2x6LXAyMDBBQ2FLSE5waVFVX1ZEOVRFaUE0NjdKSERXWnVoT1dkUC1PUFhPRkk0RVdGdklpUFdOMDVOR0xmaFU2QWotWlBBM2U1UlZGSFk?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>¿Tito double P y Gabito Ballesteros tienen una relación sentimental? Esta es la verdad</h3>
+          
+          
+          <div class="meta"><b>El Heraldo de México</b> · 14:17
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi-gFBVV95cUxPNkQ3Z3RjTkZ1ZS1sWUQ1NmpaM3lLMHlDTFBobFNrS21FcURuZE1SSHZHUHZoTElMT1RGZUlxOVZSaC1mQmgtSUNXVHpzdHMzc05aSHktck5lX2o1ZmZUTmVKUkNFUHBtck1sUnduQlU4TW9zd3lQeXJLNUV6ckxuUzd2dlpDUlFaeHpmWTNyYzEzVW54aVNqaDhIRFREZ2ljV3FkTmpWSXFCNWtyNnVuY3BMN25sdUhua2R5ZlJuSWsxUkt3YnNlaTNsb0g5LWtDWWNVaUEwaDFPanpiQmtHNnZEanRkY29WTlZqUlAxbjFhSFB1clJPNE9R?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>La falta del Reglamento deja sin contenido la Pasarela al RETA, según expertos convocados por los laboralistas de ASNALA</h3>
+          
+          
+          <div class="meta"><b>Law &amp; Trends</b> · 13:56
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxNNXFtSWxXSjE4elJLZU0xRzVwZlF6bFdPellxemZBOGMwRXZiUC1zTl9kVnc2aGNFZ2xMRTFDUDIyTUd5bnpEd1Y1ekE5Mzc4ZFdqajlvdUc4M3VoRW56RUo0R2ZnZlhBZWFQTGpLRjJsblEwT0ZZQVk1RE5yTFJLbGw3YzBmdzJKUFdZZ0xmRkZFTW1iN01EUA?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>DE-YAN’s Real Talk Interpreter Campaign Wins 2 Clio Creator Awards — LBB - LBB</h3>
+          
+          
+          <div class="meta"><b>LBB - Little Black Book</b> · 13:54
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="ia-tecnologia">
+  <h2>IA y tecnología</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFA2bEFiTU1HYXRDM1N3eGl5NUZ5VW5qU3BOUEY1UEFxTld0OVF6Z3hDQkpQTmx5Qjc3bjNxY0I0ckc2azYzRk4zRUQ2Mi1oOXpEX1Z5NnV2OGoteVcxMmlkdTFFT3JHMEFSR0o4?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Analyzing Anthropic&#39;s Wall Street debut</h3>
+          
+          
+          <div class="meta"><b>WBUR</b> · 14:06
+            <span class="cobertura">3 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPZGlFc3MtbENNUktZVHZwX1NGYWNGY1JIS2pQTDk0MlA1cldmSzFNcS1ZY1hDdTF0bjNramV0MXB5cDNmZWxTQVRYZlN3aFlVMnMwdFhJNXpCSGd5c1NUZERKZnUySmQxOGU3Ny1fZzJTSzczbXpZT2d4bEtxYTAySkRpTllaWjFZMVk3dE1rTmN5NVJYcG4yYVI5dGpERWVTUDFqZFdnN0tPMktTR1lFaTFKVTVOcG9xcWc?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>TikTok lanza herramienta para detectar contenidos creados con inteligencia artificial</h3>
+          
+          
+          <div class="meta"><b>7dias.com.do</b> · 14:02
+            <span class="cobertura">3 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxQd2R1UU5HMEVNTGhtYWxQaTNBMjVRZnZxZjJVU0U1MVk0U2dIRHh6akhYNV9tNWxXYjNmeU16UzdqZDM3bUpDS1BxOEd2b3oySzVMako4Z25JMmNFUVd5ZlFWNTZ4WmJ6d2NXT0R5Z1JsNVNGMi04MGowVF9CQkl4dEEtXzJNYWRDeHA3Rk1hV250dEZWQjNRLW5RZHZPQ0ZMMlNLSDdkejFKTklvZW1ZNDZZalFOQQ?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Anthropic Mathematician Says AI Has Solved the Most Famous Problem in Math</h3>
+          
+          
+          <div class="meta"><b>WSJ</b> · 14:28
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxOZWRvUEp6NzQ4VktKczFXSktSRlJVcEVmS0ZJZHdNUDZSenN1enRQZGtqZ20xOXctT0JYMTR0MlB5bWxFQkhSMW80QWpObkc0Z2NQd3psNWdvUE13LVNvN3hFalhuVi1fYmlJRnNhYmlIclF6c0EtZGtKUXh5VDhHODdvOWVqWjdmVzNBQi1kZzFWQkEyM1pOdzZramV4bXJPNUJRaFB3djZwRzNzZkdJX0tOV21yLS1hN1JjaXp3?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Why Anthropic Stock Is Sliding Today After Its Blockbuster IPO Debut</h3>
+          
+          
+          <div class="meta"><b>Benzinga</b> · 13:49
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxNc1RyM0lPczVNbFpRWGpvV0YxMXI5a0gtNkM1T0UyTTZtVFVjNldOMVN4b0Q3Q3NxNnNEVnBUdkJnYjlCaVNPQ1BuSHZvVkxiN3hZTWtRYjBqVkR3aEtQWV9JaGpaYzM3Rkg0clEwcTlPakJTU29fNGtXX2VWZjUyZWFETE1FS3dKczdkZkhpeEZqX3VrM0tEM2RB?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Anthropic Stock Falls About 9% on First Full Trading Day as AI Stocks Slide</h3>
+          
+          
+          <div class="meta"><b>Yahoo Finance</b> · 13:49
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxOMnY5S1dmRm9CczJCb0Z6ZlhnQjd2OE1EZUxqQ2VibjNxQ1VUbFU3TkxoTVVyQWRwUnlBSmRwX3lHX2dxcmh6SFprRXBYWkZRXzZOMW1LZVhKdTZnNzZ1dEhxZ3RSU0huZGNseUF1RXVMSS1ERjBERm9xeVFTcUlXYmJtYXJqTFpfXzhfdVo0anNaUGY2TC0ydmlnXzJUUQ?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Buy Anthropic, Sell Nvidia? Cathie Wood Just Did.</h3>
+          
+          
+          <div class="meta"><b>Yahoo Finance</b> · 13:39
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://techcrunch.com/2026/11/20/chips-can-survive-the-space-environment-can-their-financing/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Chips can survive the space environment. Can their financing?</h3>
+          <p>Lenders don&#39;t want SpaceX shooting their collateral into orbit. What does that mean for space data centers writ large?</p>
+          
+          <div class="meta"><b>TechCrunch</b> · 14:40
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.theverge.com/gadgets/1035460/best-early-black-friday-apple-deals-2026" target="_blank" rel="noopener">
+        <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/09/268738_Apple_Watch_Series_12_AKrales_0280.jpg?quality=90&amp;#038;strip=all&amp;#038;crop=0,0,100,100" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Here are the Apple deals actually worth picking up ahead of Black Friday</h3>
+          <p>A new pair of AirPods or the latest Apple Watch can make a great holiday gift, but they can also take a pretty big dent out of your budget. That’s especially true this year, as rising hardware prices have made MacBooks…</p>
+          
+          <div class="meta"><b>The Verge</b> · 14:33
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.theverge.com/tech/1038692/teenage-engineering-ep-bc-1-cd-compact-disc-player-broadcast-series-bluetooth" target="_blank" rel="noopener">
+        <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/tecd1.jpg?quality=90&amp;#038;strip=all&amp;#038;crop=0,0,100,100" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Teenage Engineering’s first CD player puts the spinning disc on display</h3>
+          <p>Teenage Engineering announced what it describes as &#34;a modern take on a classic CD player&#34; with its new EP/BC-1 featuring a slab-like design that leaves the spinning disc exposed instead of hiding it under a lid or…</p>
+          
+          <div class="meta"><b>The Verge</b> · 14:05
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="cine-series">
+  <h2>Cine y series</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiYkFVX3lxTE9hSUF6R3ZPWmcyQnZqM0pMTkQ4T2o5OGZabVlwTGhoU0p0bUtSS292NGlJZngxZklpQy1BbmJDRDkyT1hTVUVJUEI3UzAxcE1KMmRTem5pbFVBMEk2M1NpRFJ3?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>La Edad Dorada tendrá temporada 5: HBO renueva la serie de Julian Fellowes</h3>
+          
+          
+          <div class="meta"><b>Spoiler.mx</b> · 12:52
+            <span class="cobertura">4 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxNTlJXVjhlOVRfMzFZQURuNVA4ZjJDTzc5bzN2dmUwb2FmNDEtYWRwWms5Q3NaNUxjTUx1TDVxd19JdWxudjY5YnVQc0hvaE1lRVFEZXd0QVVjNnZXX21KNjh0M3F5SThxWGZULUFPYXpJdzQxWUxmRVdEWHNlZFBrYUlpUHhGTG9oYkJCVEJmT2lrN0JScXpaX1J4enhsY1N6dS1IbUc5SFZSaEtWWG5TY1BCNNIBuAFBVV95cUxNZ2ZhQ1M3eEtyZnRJWDFiTUNLS19Pa2VMblZHaE1mcWhxeDgyWWZYRlk0THNjYThvZW4tUEZ5V245Z1FfVDFwS2pzX1A0b2Z3VGRlR21yU0lHbUszYlFyeUxHYmQzYXUxVUFNZ2pjTTZaTzVySlVBNFg2MHRIRUJYWmJXdVFJbVl6LXNVWE1kbW5DZUVYdGNxRzNkUjlQcUxHNVNaaHR5UGVaNnBnckxyX2UxeFFEOVdl?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>HBO confirmó que la serie &#34;The Gilded Age&#34; tendrá una quinta temporada</h3>
+          
+          
+          <div class="meta"><b>Ambito</b> · 11:09
+            <span class="cobertura">3 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOckpYWXBOcXBoWDFpRjBQeG9NZDV2cU55ODdfN3FPZDdvUndVS3FCcGdtWS1LN0JOSU81bFhjUGZvdEdTNzZ0cGVOZHY2X3ktZHIzU2RYSXFHa3hZTEpmeDZjMTRrZzlhLWFlN1R4WV96d0p6ay1pSmJZNkd4UVpWT1BtRWhHdW5hQ0U3cVBwWTZ3czhfWU1ZNnVtX2E5UnFZQjlqc1dR?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>¿Habrá una nueva temporada de ‘El juego del calamar’?</h3>
+          
+          
+          <div class="meta"><b>El Comercio</b> · 10:00
+            <span class="cobertura">3 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://variety.com/2026/film/box-office/box-office-hunger-games-sunrise-on-reaping-previews-1236953592/" target="_blank" rel="noopener">
+        <img src="https://variety.com/wp-content/uploads/2026/11/MCDHUGA_LG068.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Box Office: ‘Hunger Games: Sunrise on the Reaping’ Makes $21 Million in Previews</h3>
+          <p>It’s time to head back to Panem with “The Hunger Games: Sunrise on the Reaping” this weekend. The latest entry in the Lionsgate series has made $21 million in Thursday previews and early screenings Wednesday at the box…</p>
+          
+          <div class="meta"><b>Variety</b> · 13:05
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi7gFBVV95cUxPeGUtZ3VvV2FDWnFieTBCWW5YbzZHcl9scWlmblNOQjFNb1Brdm9zTms3bnBVRnlCZUtXa00zeXBJcGpVbGNTaUZhSmNoT3FHcW5Ya2Zxa1J0eEFCM2htTGtxd1J4U3daREpMamZXaVBjeHFOak9Na21aWVB3a0VFc2pXcjVULURTX0tMTHM3Qk12WVRvQi0zcUVNcDBBb1psdjZoMkhCMDhmRVdkLWdyTU1ONTltVzNaZF9pdkduTGh2Zll4dlhoWnU4NkVTOGhScmNzMDVLeGc1RU9WdXdXbG1OUzhKeDJHUkxUdTBR?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Francia: investigan a Gérard Depardieu y al escritor Michel Houellebecq por presunta violación grupal</h3>
+          
+          
+          <div class="meta"><b>La Jornada</b> · 13:25
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMijgJBVV95cUxQM09NbHU5eWN2NGpURVhyam1oLUdLM1lhRGtqR2NkZUd2aDQxYlhqbnVfVm5rZHJScUJ4bDd1dm84SnQ3R1FBanJ0eldJc0hvbWtvdU1mUzZnWHZKNkNCTFl1eGN0REtwRUFnQXo0N3RsRDdTZUZXejdLZ0wxcWM5ZjlYQlJmWVdodjB5TDM0aGhhdVZObTRqZnRpVG5CMk9FTFRJZmRkYmdiblFDVnYyeWRaY0JCdmtyMzhiWVZ6TEpXZG9BTERvMThSZjJiRmZuQUFTQTA4QUdmQXlaSVd6TFd2SmMweDEyR0JpUlMyOVI0SGw3TEI4TTh3aFctVGYyYndFRGxnemMwZy01Z2c?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Lo más visto en Netflix Estados Unidos: las 10 series más exitosas del momento, con “Desaparecida: Natalee Holloway: temporada 1” a la cabeza</h3>
+          
+          
+          <div class="meta"><b>Radio Hache 97.7</b> · 12:22
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://variety.com/2026/film/news/lili-reinhart-polly-pocket-movie-lily-collins-exit-1236954282/" target="_blank" rel="noopener">
+        <img src="https://variety.com/wp-content/uploads/2026/11/MixCollage-20-Nov-2026-09-35-AM-5615.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Lili Reinhart in Talks to Join ‘Polly Pocket’ Movie After Lily Collins Exit</h3>
+          <p>Lili Reinhart is in discussions to star in and executive produce Amazon MGM and Mattel Studios’ “Polly Pocket.” Reinhart joins the film after Lilly Collins exited due to scheduling issues. Collins remains on as a…</p>
+          
+          <div class="meta"><b>Variety</b> · 14:44
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.espinof.com/directores-y-guionistas/hayao-miyazaki-director-deseo-buen-futuro-a-bebe-porque-no-puedo-decirle-que-no-deberia-haber-venido-a-esta-vida" target="_blank" rel="noopener">
+        <img src="https://i.blogs.es/17ef69/hayao-miyazaki-pesimista/1024_2000.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Hayao Miyazaki (85 años), director: &#34;Deseo un buen futuro a un bebé porque no puedo decirle que no debería haber venido a esta vida&#34;</h3>
+          <p>A sus 85 años, y después de haberse convertido básicamente en el padre del Studio Ghibli , además de una referencia para todos los cinéfilos del mundo, el japonés Hayao Miyazaki se ha ganado con creces su jubilación…</p>
+          
+          <div class="meta"><b>Espinof</b> · 14:30
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.espinof.com/reality/belen-esteban-olvido-hormigos-origen-guerra-televisiva-que-dura-14-anos-que-ahora-podria-llegar-a-su-fin" target="_blank" rel="noopener">
+        <img src="https://i.blogs.es/83b1d3/olvi1/1024_2000.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Belén Esteban y Olvido Hormigos: El origen de una guerra televisiva que dura 14 años y que ahora podría llegar a su fin</h3>
+          <p>La televisión española ha sido testigo de numerosos enfrentamientos que han terminado convirtiéndose en auténticos culebrones . Pocos, sin embargo, han conseguido prolongarse tanto en el tiempo como el protagonizado por…</p>
+          
+          <div class="meta"><b>Espinof</b> · 14:00
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="musica">
+  <h2>Música</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxQTkZQNVVpd2w4V3FrNGZlNUFIWjVXRzJKeEJ6R1hiWmdSRDl5Sk1ua2RMRG41VTAxWXBkUXltaE81c0lLQ09QdEhNMXZBZ0F2U3YyNWZGVWZLdDJFb0czbWswRVpTSFZVU0JDRWNNRTVMbnJVSS1xT1ZDeDFKUE1mUG9qX0Vfb2VxVlZWR0ZSUWRlRG9GTjBMbzRZQ0tkUkRY?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Gira de Alejandro Sanz en 2027 por España: fechas, ciudades y cuándo salen las entradas</h3>
+          
+          
+          <div class="meta"><b>El Confidencial</b> · 08:40
+            <span class="cobertura">3 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTFBsdFJOWlR1ekNWcDVlMkNrQ25tdE1Tc3owSnJsRTN6azBaaUlGc2JEMVdfa2hrN3VTSlpiRG1EMmNuQ3BoVXhfQUItTUkwTy1hNFpQbFdSQkhyX2tDT1NIOVIzbW03RC00OTNLUjFuUTM?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Carolina Durante publica un adelanto triple de su nuevo disco</h3>
+          
+          
+          <div class="meta"><b>Indies.es</b> · 12:31
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNSmNKTG13aDJVR3B0NzhaeUotYkV4XzVJaDB1THk4SmJ0MlVuOEk1NlBVeWhKSjlYMW84OGljeThxV0xvSFBoeWoxc1RGU1hMVmZ3WG9IQXN6aGxYcjI0a0o2ak52MWFZemsxUllqZDRWOUc5azFvaWxFdDB5dGZRWlcwampjNHFxWlpCTFBTdVNfUTBaMUlEbzZkZHdCZlZqRmozczRDdDhyelUtOWk3T25tQUtHS0szTHIzUU13TXNYcUhTT1E?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Nicki Nicole presenta &#34;Rayo de Sol&#34; y &#34;Eterna Soledad&#34;, con los que anticipa su nuevo álbum</h3>
+          
+          
+          <div class="meta"><b>Quiero Música En Mi Idioma</b> · 11:29
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNYlMwSGVHc2Z4YU5PM183NkRtU0c2RWVFQmJISzhQMDhEWGxYWnZveDRiOEloNWJBYUlROVFWeXZkMXdfWFduV0wtd2kxVGM2NE1saER3UHhTcGlaT1E3c3BJU3hYS1ZsX2xoY0cyWWV6SUhCbUdGR2FzU1FpLWd6Q0JmWEdHUGdlNF91b0YzNEVOWTU5eUN2eFg5bXZXQXJjTzRpclBSTHE?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Carolina Durante anuncia nuevo disco y presenta tres nuevas canciones</h3>
+          
+          
+          <div class="meta"><b>Indieofilo Web</b> · 09:19
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQd1VFbXB4UmNJbENqcnY0LW5oaFVSV3pZNGxwVFZfLWdEa3d3aWhNei1fcV9mMmN4c0I0OTNpWnV5M3hqUDRiNzVqQWYzU0d2Z2dGc1hUWnZEalhtb2NsZ3dBaG9DWDB6Mzg3bVNuV280Qm45eFdJT3ZoUC1HbnNBZU8ySnhDc09ESVF5aS1HVW0xYjlNWnBib0lPRlhiZklkQlNNbUhicTF4RmpE0gGyAUFVX3lxTE01U3doRDFLTk80NERqUF9hUjlCS3B6MWJhcUw0VEZQblU5QmlFN3c0dXJvaTlMSk00MHVGVUlQd2RQRXFLMkdiLXV0U2xDcGFZUkZyRW10TEhZX3pXLUpyQkJyZUdHOFpILW90ckZBazVXTFBKem9wT1pJTktBcklpMzgtdzF4M2N6VFNMRFVuRWJRdi02UE5UVXZNZ3NkQ1VYU0o5TEpwTVc0MHpZbk0xc3c?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Preocupación por Ian Gillan: Deep Purple suspende sus conciertos en México</h3>
+          
+          
+          <div class="meta"><b>Excélsior</b> · 00:17
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.billboard.com/culture/tv-film/brandy-moesha-reboot-usher-reuniting-1236386509/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Brandy Believes a ‘Moesha’ Reboot ‘Can Really Be Something in Today’s Time’</h3>
+          <p>The &#34;Have You Ever&#34; singer floated a possible reboot on The Jennifer Hudson Show while reflecting on her reunion with Usher.</p>
+          
+          <div class="meta"><b>Billboard</b> · 14:39
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.billboard.com/music/awards/2027-nea-jazz-masters-list-recipients-1236386436/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Harvey Mason, Rufus Reid &amp; More Are Named 2027 NEA Jazz Masters: Full List</h3>
+          <p>They&#39;ll be honored at a tribute concert in Washington, D.C., in April.</p>
+          
+          <div class="meta"><b>Billboard</b> · 14:17
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://pitchfork.com/story/lana-del-reys-crazy-for-you-gets-official-release-for-gta-vi/" target="_blank" rel="noopener">
+        <img src="https://media.pitchfork.com/photos/6b006a18cf9176131d6d997d/master/pass/lana-del-rey-gta-vi-crazy-for-you.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Lana Del Rey’s “Crazy for You” Gets Official Release for GTA VI</h3>
+          <p>The keenly awaited loosie has found a home on the blockbuster game’s soundtrack</p>
+          
+          <div class="meta"><b>Pitchfork</b> · 12:42
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://pitchfork.com/story/5-new-albums-you-should-listen-to-now-atlas-sound-toro-y-moi-and-more/" target="_blank" rel="noopener">
+        <img src="https://media.pitchfork.com/photos/6b005e883a31102026cc1a82/master/pass/218d258c-b21a-4910-88d1-cdf890c692cd.jpeg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>5 New Albums You Should Listen to Now: Atlas Sound, Toro y Moi, and More</h3>
+          <p>Stream new releases from Atlas Sound, Toro y Moi, and Lorenzo Senni</p>
+          
+          <div class="meta"><b>Pitchfork</b> · 11:53
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="futbol">
+  <h2>Fútbol</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMilwJBVV95cUxNWE5BRnR0Z015OU4xeGZwSlFjRFVnNWxKdkMydFBsWXl2eEUxX2wzUVlzT0VKbWRjNXJnM3I5a3Ztb1FVMmRJc21DR2l1dzI2UFZxVEZpOGV6cUQ4S2hTZTMwbndxdGhIeERSZ1BTYkUxWkZ3SnktTmI2d3JzQThjWlBFcVVkODU2eUVfMTl0YTdYcnNGS2NRY0lXNXV0VGFwV2lwaFlubG9hckhLbEJpem80bnJSbVhiaW9YOGVqSEtoZzVlVDlhMmt6QmtlZ0R2MUVrU0NPQ0l2c19xTV9LR1lRTTNYVmpxUUhqMjJManVnWTlWSFhGRFNHZlkwME9JbXVUanZvWDd5dDJFaDNOaFQ4MVNwaXPSAasCQVVfeXFMTnNfbF9uLVh3czdQYjNlTVFoSG05QjJBSXpyOEFmNFktcnZNbFFYZTJicEtUM09qeTJvcVVVY2kxWVJOUDF2b3p6UVlBOTV1ZEhSREJKbzhhQWgzNGpiak1hdjFjb2dkXzhZNDlVMXN3cUdzeXR0eWh1aGsxVEpaMkF6bzB0UjRUcVhWMVk1SG5JY3U0U19jbEpKMEpkSVBaVGUyYTFQclFxeWZ6bHloT0kwandVcnU1bEVodEFCXzhDdUF1YlhnVktZMUMxS0s0akwxaHNXVnA5cnlpMDAwT2J4WjhVWlBfcmNZODVyQjNIWU4tbU10U25JVlRMRWE2WXZIUi05RVNfVzZOQjlzeW5rUFQtV0VqUHpiVVNtV3dzY213M2g1SWNfMXc?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Copa Libertadores: Por primera vez la final tendrá show musical en el entretiempo</h3>
+          
+          
+          <div class="meta"><b>El Comercio Perú</b> · 14:05
+            <span class="cobertura">7 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBLYVNWYXVwY2pLNHI0Q3VKaVhXWXpWUEE0UHR3RzVoVl9VNFFaRnV2X2NYTW9rb2xhd1FhYnRVVlg2eVlmdlJXaHBZNFVONmxXd2xWdFhYUE9oNnBROHZfWGlaa3FqWGhRbHlSMnR0U2ZQN2ZpSTlaT3BvZTg?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Qué necesita Nacional para clasificar a la Copa Libertadores 2027: todos los escenarios</h3>
+          
+          
+          <div class="meta"><b>365Scores</b> · 12:30
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi8gFBVV95cUxQUGxZdkJkWTA0UDRsbG9Jb0FqN1F3OFpzRE4yeWw1NnNscmRYN2U0OVY2MGsxVHRtc3dYYmNhTVNfLTZleEY4aHZWYm12cXdIODNodWswUkJvNUtTeFNvQlY0SDZ4U0xfYlotQlNsUEQ1Q19HallkWmx2R1gxeDRpc21IeHZfLWNQWVZmNW5TbWNPcUlDaGE1cnl1RTBtN2ZSbUtBcUpGckVOVmI2XzlHZllsclVoNlUtcWMyUHJQbGRBN1dYcElqTm1XV0J4MWx5RGZ6VHowVE4tQjQ4clQ3Q1NGeHgyZ1FINVEwSnlqM2JNQQ?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Marcos Rojo: de la importancia que tiene la final de la Libertadores a &#34;creía que no se iba a dar mi vuelta&#34;</h3>
+          
+          
+          <div class="meta"><b>FM Del Sol Pehuajo</b> · 12:01
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiqgJBVV95cUxPUC1qSm4zdWdCSHJiYlJkRXVPYzVRSGFHX2VIVzFWWDFfMDFmNmh4R1BBS2JnTnVlaUN4d3pXMTJ3WEFPT0pnWlNPelI5RVNLclljQ0NQNWFfaHVUSFJybUFxeUtSRDRHT29FT09TMWZMZWlwR3A3bkdKSldzNFRveGFzN3ZYeGthaHIxUF92TWxUcHdmSGQ1Ri1GbGtWT1d6SER6eUZTSzM5enpwdkdteDNiWnRwdXVWN2k0VnBQZlJRSVZ0SFdyZXFGQzRnYk5QTEJpc0xpU01qT0NJNnJBWkd6TUlxbUc4bVRjbDdZZUs5Sm5pY3NtVjVlZzdOTDBiNi01WmktM0ZjM0V1VGZYNUpWMXpPQ3lJQ0NHbTRHNm5KRjF0bEhJR1hB0gGvAkFVX3lxTE1WMVFZOEd0UzNlSG1zVHFqWm8xaWZheEZYOUJLazZkbTNYbHlCanYtZ2piQTNGdXRfWU03MXBwMWJ5WHo1YVZ5U2dzZEwyWjluVGtuUWd3bjdScFdteHlXU2ZGZ3JHS0JWMHB3V2Q5T1lZT3FpNFFWQzFuN2Iyc0g3aThsT29sZC1PY0lmQ0hfQlh5ZXBwTFN1a09FZGhQZmRQMzFzX3NGdXllb2Y1VWxpZTdWM3pTN3k0SkJvaU55YWJrbzQyMWEtd0dKNzcxMHQtbk1tRXYxcThyNUlueFQ0dGZjQzF0aDl5V3Y4OS1Sc3k4Zi11YzVKZFItMWZRS2dMMVpUbjVCenJ0X2hyek1leDRoVXZmcFNoTXlmMWhlLVh5c3VIMXE4N0hLeWpPOA?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Barranquilla busca la final de la Libertadores 2028 en el Metropolitano: la ciudad quiere hacer historia con su postulación ante la Conmebol</h3>
+          
+          
+          <div class="meta"><b>El Tiempo</b> · 10:41
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxQMnBKVVVRd3llNmRwdFFiT2VUU1dyU0VtWW5nMk5zWWdGdlV1YWtzTF8yaGRpV195Q2xybGprZzBybm53ZzFnWGdLNUM5d3VJTi1sOFNQMm5iUlowZEpoR1ZVLVlkTTQyOWJ5Z2t0bmU5aHRLRGxGREc0UlBVeGEyN1NxQS1UNU82NnB1X1ZjcWRJQXV1MXZXYXdzQ3lhbmtrNDlxa2s1SGNVZEJjQ2JMdHdWYVdDY2NCTlg1RDZESzZuX2tfandJOFhQRGNBd9IB4gFBVV95cUxObWRfbnlzYktRdmpSMFlBdG4wc1lSSjFjNTB3UUNSZ09IUi1TY0FaWEtyOGF3N3JBUTZYUS1RZXJ0MUdmV1lpWEs1Z3hTUXkyVW9UY2oycEZNekJxMVBFMEY3RndEZkd2QnlyQTJ2bFhJOXBNMUdOZ2E4TUhhckNUcVZmbTlhaUU0SjhXZ3V3TjlhcEZaWGZmckZablNyRTZSR056bzhEV1B2NGcyNFlMSWxfc19iR3NDV081Z0tVbFlod2RrQ2RhSHNOQVB1OV9vLVpDUUl0QzZQb3FkRDd6UFB3?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Mauricio Isla vuelve a las canchas: participará en especial jornada con un club del fútbol chileno</h3>
+          
+          
+          <div class="meta"><b>ADN Radio</b> · 10:40
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxOakx0LXNvNWs5c3c5QW1RZlQ4WUNsOVlqT3YtNkxsaHhxODRpb296RE5BSmt2b1VZMmZOQUpKWWI4UHM5QzAxSDUyZkl5TGRiWW8tTjZXVDJzYThyNG5hMHdpVDM4RTZreTc4NDRGd2pMd2N0di1yN3g5LU5kSW5HSGVER3NvVHBINVJVVVRBRVk4OGdEMWJlempyMA?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Se viene la quinta edición del Diablo Nacional de fútbol femenino</h3>
+          
+          
+          <div class="meta"><b>El Marplatense</b> · 09:58
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxPMVhNck1VYzdGbFZCYTZmM3dQWmFxOGhvTHdwNmlQMERrWWRhODZBMHB3cjNUTXpDaTNreXp1WjFjLUdIdnBMc2hObDFsTXZKYUZzZzNOLTBoRk9IcmZqM1BhMkpCRGRLdThETFQ2bDVha0Uwcng2ZnkybE9WQ0FZZ3JacXZicjMtYUEwck5UU3ltbk9Ia002WEVRQl9EUEU?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Sheika Scott anota su primer gol en la UEFA Champions League Femenina</h3>
+          
+          
+          <div class="meta"><b>Delfino.cr</b> · 01:22
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQV3NCYWVxLUVUWUh3U2E2T2hNZk9wVXFQNUVReklKcnhVOUxJWnplSGNtNmYyMHR3dDZxc3ZvNXZjTm0xRkYybVR6ZDJLT2JhelpqVGlPZURsUWpKUlhVenY1eDZENVZZNTJkTW8xbEx3LVNpa2pYWU1idVd3bGFLSEJOZFZWVnB0QjU3MEhTMEVCTlRzUk5r0gGXAUFVX3lxTE1oZmRpS1VhSC03QkJpbmRzUDU3Q25ua1lTWEtQZUNJRE90MU1BaUcyTjcyWVZJRGExbkhZUUtZdnpWSGVGUWpvQllmX0dhRkJDR0dEQkRRUzhFYzZ0cXRaZ0tfR0cxRUI4V2s5OUJCSFN5bndTYzR0dXR5Z1VtRWFZeGRFM21NUjBaNThzNTBhek1uYnhUNEU?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Barranquilla sería sede de una final de Copa Libertadores: esta es la propuesta y sus rivales</h3>
+          
+          
+          <div class="meta"><b>La FM</b> · 14:25
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQZlZOMnBybXV0blZFU19XZlRTOUVHZzVDeExHc0pqTng3MnU5T09wYTVDdXR2RkdCUkJHSzRVNjZMNzhvY3RjQTZhbzZoZVJ2c1RKVWZkaW56V3dTcGJPeUN6a0xuZ0tZQU0wdjBzYXpsWjlKNWJ2XzI3a2pDZzZWVTdBUVhma0pQOEIzUDlsbi1SR0hxek1ZTV9FZ2dhSXM0REd3XzltdTZlUjY0b3RUWFJ5a0cxRmNMeXc?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Medellín de Bravo recibe por primera vez la Copa FMF Nacional de Futbol 7 Sub-10</h3>
+          
+          
+          <div class="meta"><b>Golpe Político</b> · 13:54
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="uruguay">
+  <h2>Uruguay</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOUUc1Sk10emVRMGNkbmlKMHBTQ3VnQnlHOU16LXZCeU9FMFFIMzlPSWYwUE5GelJSRThFM01LUUdtamJGWkJWMHpkUng0ZTNXUWFHUUZRWHlyZ3JzV01tN3hjOFE2U3FhTGRXTjJHUlhidmgzb09Zb21LQTRHNHVlU0p0cFN3cXJvR1RodWpzQmh0TkpJOHBFZW1KTDNQd0xZSzd4dzdvNFBOcmZnWnpV?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Iglesia en Uruguay crean la “Beca León XIV” con el excedente de fondos de la visita del Papa</h3>
+          
+          
+          <div class="meta"><b>EWTN España</b> · 03:59
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.montevideo.com.uy/auc.aspx?982965" target="_blank" rel="noopener">
+        <img src="https://imagenes.montevideo.com.uy/imgnoticias/201201/_W620/351319.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Pity Álvarez fue condenado a 12 años de prisión por homicidio, pero no irá a la cárcel</h3>
+          <p>El músico argentino no escuchó el veredicto, continúa internado en una clínica psiquiátrica y deberá cumplir la pena en su domicilio. El músico argentino no escuchó el veredicto, continúa internado en una clínica…</p>
+          
+          <div class="meta"><b>Montevideo Portal</b> · 14:25
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.montevideo.com.uy/auc.aspx?982961" target="_blank" rel="noopener">
+        <img src="https://imagenes.montevideo.com.uy/imgnoticias/202611/_W620/979878.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>“Me tocó la cola”: almacenero manoseó a un niño y el vecindario saqueó el local</h3>
+          <p>Sucedió en Argentina. El comerciante quedó imputado como presunto abusador, pero otra causa lo tiene como víctima de los desmanes. Sucedió en Argentina. El comerciante quedó imputado como presunto abusador, pero otra…</p>
+          
+          <div class="meta"><b>Montevideo Portal</b> · 14:01
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://ladiaria.com.uy/politica/articulo/2026/11/july-zabaleta-sobre-el-microtrafico-en-mujeres-la-violencia-de-genero-tambien-esta-atravesada-por-el-narcotrafico/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>July Zabaleta sobre el microtráfico en mujeres: “La violencia de género también está atravesada por el narcotráfico”</h3>
+          <p>La directora de Políticas de Género del Ministerio del Interior defendió el proyecto del FA para revertir el impacto de la LUC en las mujeres condenadas por delitos de microtráfico, que la oposición no acompañó en la…</p>
+          
+          <div class="meta"><b>la diaria</b> · 12:13
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://ladiaria.com.uy/opinion/articulo/2026/11/elecciones-del-bps-una-mirada-desde-el-interior/" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Elecciones del BPS: una mirada desde el interior</h3>
+          <p>Este domingo son las elecciones de los directores sociales del Banco de Previsión Social (BPS) en los órdenes de jubilados y pensionistas, trabajadores y empresarios. Por supuesto, esta opinión, como todas, es…</p>
+          
+          <div class="meta"><b>la diaria</b> · 11:57
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxPakliVFJ1LXcyTjcxYmlhcnlIX3VLQ0k4dVc5OFowcVpEWTJ0MFRTME5TMnFZTlpiNl9PdE1jcWhJQzVNVWs5SW9IdjBfRVRKN2I0REVRVDVFajhscHdWeFVjLTZOUDNIQ0RURHk0Nm1HRG00VHhTRlpIeFBZN21yMU5STlFZUTE1Mk9vRkNDWGUyNk1iOFh6c1FwV01OaTRQYmk4VTlCMncxMkdUeVBFZ0NTSzdWZDQ2cEdXTlp6SVkyY1dfaVpUbk5mbDZmV3puRUg0TVNyUHUxR1lITkdFNnBkYUxkWHZ4UHfSAe8BQVVfeXFMTWxkTnh1WmZYbUlCTFZueXU1aDFUanM2bFl1cEIzWk9Id24telVZckdnSmZJSWxtOEdvYUxNaGpxN1U4djB1NjdmMXhpMVo4el96Q2Y2d19xUlBQOUhWem1sNGEyOGh5enlFRFRpNGF5QzNDQVBoVFo0OF8zV1Q5aTc4WUlzTzNYMjdZSFc0Y1Q3WjFtcXJQbGhtbEhET1QyVjlFUlhfbXFtR1huYXZUc2ExSlNvcG5ySE5VQm9yR3JfLVo2M2J6ZXNoZTBTbC05Q3hEdHdIRnNtNXF4MXVMQUI0RW9JVnZ4WFhsaWRsT2M?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Uruguay cayó 24 puestos en dos años en el ranking del Índice de Desarrollo del Gobierno Electrónico elaborado por ONU</h3>
+          
+          
+          <div class="meta"><b>El Observador</b> · 14:14
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNVTRSZ0JIeWM4NzlSYlFOa1Y0OHdLcl9LU1NOTktlR2ZFb18wb1NKUE5Yb3oxVFhfV1JmVnV3VE9tU2FFNUtZOEpYREgwbzFUd0JtamtMU05QOTJuRG1qSUlzc3phdXNKNUdROUZQam5xMFRFTjR6bWR3YXNHeHlvMW91eGprQ3hkMVYzdEZ1QlkyM0o1UG9YZXp2aWdWZFZwellGbzZJYl9wOUhLdmc?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Una tempestad deja un muerto y 8 mil viviendas dañadas al sur de Brasil</h3>
+          
+          
+          <div class="meta"><b>Plano Informativo</b> · 10:12
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMikgJBVV95cUxPREtKamoyRnlMMmRpbnVOZ2I3dGt0NF9LdjdBYmhDY3QtaTVzTnVxYklDc0pjY0FCR1JZRnZmZS11T1NVRVp1aTFTcFgtOFJ4VmNsbFNjNmZHbUhEZl9Pb0VYNUZxNlhoeHJMOGlxN3FZWm9md01LYy04Q0RIenFCQ0JYZURjbklWdVBjOGFBQnhmel9fekJmRVFpRjNTajJFR1VJeUJuLVlXeWU5OVFYY0tIaUdjdWNXdTV1cVkyakUwaW10Q0E0RjkyRUlhSkQwOWgwVldmSHVUMUFGYVUwMkVzNERMN19NalF2TXY1RTg5d0RuaThvaEI2ZV9nS0ZLYng3cDRmMVUtTEdGdXpWN1FR0gGXAkFVX3lxTE9FT2tjWFJoSEhUQUJMdHhLTmRkOFctREoyVC0xODJGeDJqRkZPS050cUtIR19TWnR6Z3doZzRMdjFuSnZ3YjBTYlE5LWtXeTVzeTg1UnE0UHdEM3p1ZlkxYUNrZ1FKck5qTlZrSmVreFl6d01PQlNZcWdYZHJRYVprS0xpNnVvWGdaS1dSWldXaEpJWElmVFBlTlYyYTBoM3RMdGxEdzBlNURJZk9pNXVUMTV6WTRLcVlWanIydGd5NnBtSVhwX1gweHYzbktiU0VhNWFTMnMxWHBORlJZMnYwck1tOUN3aXZ4ZkdJUEE2RzhrOHZkUkxsM3R1ZDhjNHhhbUo0MlVqcFF4QzhaOTFsU3pwRGhHaw?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Polémica con Araca la cana tras la Prueba de Admisión del Carnaval 2027: la murga anunció que reclamará su puesto en una &#34;instancia legal&#34;</h3>
+          
+          
+          <div class="meta"><b>El Observador</b> · 09:44
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi7wFBVV95cUxQeDYteFBuX3puTTFMNkZIeGRkZVlwemRvSVh0azlQQVNQV1lZSXV4ZUZZcTloNkFuTFhQcnlBM1JIaWpGSDFMMFlZMDVra1drSmJrMkFFTnkzcElyNE1BaGx6dmtoRGpoRS12ZEh4a0xIZlduNW8yVUNYY2wzQ2oyUmtsbVJTWTF4R29nVWNVNFk3T2dLVzVEaldmT051WVIxZF9taEozS1lWektxaDlsbFdYZElFOGRJSzloYlVZU1BFQ1g4NFhkZ0dDRHhhVTktOERLZGFTTGFaRm1QY205RmhZQ05ZWk92OHFFZXE4WdIB7wFBVV95cUxQeDYteFBuX3puTTFMNkZIeGRkZVlwemRvSVh0azlQQVNQV1lZSXV4ZUZZcTloNkFuTFhQcnlBM1JIaWpGSDFMMFlZMDVra1drSmJrMkFFTnkzcElyNE1BaGx6dmtoRGpoRS12ZEh4a0xIZlduNW8yVUNYY2wzQ2oyUmtsbVJTWTF4R29nVWNVNFk3T2dLVzVEaldmT051WVIxZF9taEozS1lWektxaDlsbFdYZElFOGRJSzloYlVZU1BFQ1g4NFhkZ0dDRHhhVTktOERLZGFTTGFaRm1QY205RmhZQ05ZWk92OHFFZXE4WQ?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Tesla anunció los precios de sus autos en Argentina: están 38% más caros que en Chile y 24% que en Uruguay</h3>
+          
+          
+          <div class="meta"><b>El Cronista</b> · 09:11
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="finanzas">
+  <h2>Finanzas e inversión</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPcmpNQkRYVzBIX3hJbjY0YnpFQUNRVVVvLWIySHByay1NSlhyWXJsMWtGLWVtdGt0bVBKN0JNQ2RodFppdEdiSjY5Y3VQTjAxR0Z6XzA4VFEwcnNPZk0yelQ0QTM2cEkzanl2NFllSl9LeUNOaDdGWWpJTkx1MzY5UnVLQkdLajEtTEpnaktiSl9NZlhKWTBxMtIBswFBVV95cUxNalRSN0d3cE9TaGlmNm1iREp1N1QyVklhaERfUjl0eEN4ZlhjaEJPcFFGcXpweHBLSU0tdnhTcUdRWTF3VEtmNTdYbno4UV9VNHY3NS1TR21KT0w2VVFwaHFFYWNvVmh3V2tfWm9GTVd0T01BZmhEemZZNDd2Q3VMWmEzRlZ6VUcwUUxqZFNoMXBVMUpoc3h6aDR5MEFobU1GVlN2ZHhoeEtpMGIzNXhockdyYw?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Uruguay colocó deuda por 1.250 millones de euros</h3>
+          
+          
+          <div class="meta"><b>El Cronista</b> · 11:16
+            <span class="cobertura">4 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMihwJBVV95cUxNRFU2cEtldngtdUxKY2NIVmNuODJLUm10MldGM2Z4S0UwY1pzUUJURW1LZVlHWEc3LWxWekdHODFaMDIxbzFfQjFHbUNFMG9TdmRyVlJVVXlOakotUDhfWHg4NDdRZUNoQXJwV3FjUUVtaVVJODVyRjM5Mnl1T0RPMktNN20tSFFDNG9HeF9uWUFwZ0VBS3dSZk1rYVZGdkszQmtTR0tFakhkX0RHU0FBOEFhcmR4emVuVU5BOE5VaTY4NkJ2MVZUZzVLcGVQb0J2Qk4xUERkdFhlOEd5aXpLcWF1ZzRaMkUwUGczX3lzZXJST0F4aVJSY0lZdFNVV1lnbW1YSHdtOA?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Fed officials sound alarm over AI boom&#39;s growing inflation risks</h3>
+          
+          
+          <div class="meta"><b>KCBY</b> · 14:12
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxPeE9oYUNNX0FLVXZFUXRyN245aUwxVFN3LUNQNmI1T21yXy1LMWdfMXRnazc1Mk8wWnFCQXllVTl1TlJ4SUVCZHdPYjR0akhacW9EQ3pTMGhUMUg1Ykh0Vi1qRC1zYlAzTEt0WHduNzZYMVFyclVaaEdxT3ZRX1N5eTdpTG1VSF8tbjRuZjctVlVfRWEwX2tVa0VTMzkxNEQzQ1ptT1F6WlJMNmtpbW5V?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Wall Street trades lower as the tech space remains under heavy pressure</h3>
+          
+          
+          <div class="meta"><b>Seeking Alpha</b> · 12:59
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOazJVaF9Sd3Q3TnBVTEMxU3VTbGtvUjVKUkR1U2dXTlFiRFh4cldtdDRzaUd0elVPQkdlbi01NUR1NHNaNFVydWYzcmlhSllrek85d3ZsNnFTeGdPWi1nekR3ZUVNRXJKSjlZLWo5Q050OWZUYW5ZQ1pfS1V1Z3lBemdFQ2dlR3g2c0JwYUlRanNldl9rRGc?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Netflix Stock Is Down 36% and Wall Street Keeps Downgrading It. History Says That&#39;s a Mistake.</h3>
+          
+          
+          <div class="meta"><b>Yahoo Finance</b> · 11:27
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi7wFBVV95cUxOY2RHX0NtUG1VLVcwVnJMby1NX0JCZXRBZlhJVmNfd0pVRGxhVW9xOTF3NDM1azlxQ3NGY2IzMXV5ODJJbmdQdE9QYlU1UzNuV2JQc2Mwcnh6VkNqNm5fZExwX2M5emljb2c1cGxUSHdpdDNGb3g1anNRNjJTSmNGRjV2Q2FNWmdSSzQxZS03eTJoc18zMkFaYkRtVnNkTEFPUERINEVLRk1PcTdvaHRNMV9PdXlERi1wZW00bktOdDZVTzRoczVSUmlCc1k3SUJHMm9xTjd5ejR4bV9XQVJJSGcwYnJVUlotQ3lLYzJBY9IBigJBVV95cUxOcUliMkNPaFVDQi1sdTNMN20tNlBIZlVZdGc2aXJzYkRYTS1QajVUY1VLQnp3NzJZbkV1YnZYVzVjWlJiZXM5OVE2M1RLMHpMT0Z3cEtfLWs5MTFpWEZDcV9QbjZiNlBjVHlyMHVxdXduMmNQalJ6WG1aM0JPVHFGSFJZNEhGMENWZ1Nmd05lNFlzTmJUOVN0bWJ3WmZtV2ItYVpHVDVnemNZMVZxck1lRGlVeThURUw4V0R3NGZBaGZmNmdhSWN0V0Q3c3MtMkpqNTFXTmpQT3FpRmxSdXU2UDNuRkRZSHN5clBuMWtrSHhyZXRvSmFMUXBnX2d4Y1NBRE1jaVl6eUdoUQ?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>El talento y la inversión iberoamericana refuerzan su presencia en empresas españolas, según Forbes España</h3>
+          
+          
+          <div class="meta"><b>Infobae</b> · 08:45
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.cnbc.com/2026/11/20/bitcoin-price-gold-market-hedge.html" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Bitcoin sell-off: Crypto is failing the &#39;digital gold&#39; test again as it sinks with stocks</h3>
+          <p>Bitcoin’s sell-off is tracking risk assets again as experts weigh rates, ETF flows, politics and whether the crypto can function as a market hedge.</p>
+          
+          <div class="meta"><b>CNBC</b> · 14:25
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.cnbc.com/investingclub/2026/11/20/heres-why-we-want-to-buy-the-sharp-decline-in-this-chip-stock.html" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Here&#39;s why we want to buy the sharp decline in this chip stock</h3>
+          <p>The Investing Club holds its &#34;Morning Meeting&#34; every weekday at 10:20 a.m. ET.</p>
+          
+          <div class="meta"><b>CNBC</b> · 14:22
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.ambito.com/economia/eeuu-autorizo-exportaciones-casi-900000-chips-avanzados-ia-china-seis-meses-n6347525" target="_blank" rel="noopener">
+        <img src="https://media.ambito.com/p/3d820cb108cfa41345028ad6e9b59562/adjuntos/239/imagenes/043/524/0043524988/china-eeuu-tecniologia.jpg" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>EEUU autorizó exportaciones de casi 900.000 chips avanzados de IA a China en seis meses</h3>
+          <p>Entre los beneficiarios figuran Alibaba, Tencent, Baidu y BYD, empresas que el Pentágono incluye en su lista de firmas presuntamente respaldadas por el ejército chino, según el comité de la Cámara de Representantes. Los…</p>
+          
+          <div class="meta"><b>Ámbito</b> · 11:11
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.ambito.com/economia/mendoza-posterga-su-ingreso-al-sircip-que-empieza-regir-diciembre-seis-provincias-n6347432" target="_blank" rel="noopener">
+        <img src="https://media.ambito.com/p/cbaa9c0e154e399b8c426a541be12b96/adjuntos/239/imagenes/043/748/0043748230/1200x675/622x606:642x626/computadora-cyber-monday-1500-x-1000.png" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Mendoza posterga su ingreso al SIRCIP, que empieza a regir en diciembre con seis provincias</h3>
+          <p>La provincia informó a la Comisión Arbitral que tuvo dificultades técnicas y operativas, aunque aseguró que se sumará al sistema de percepciones en los próximos meses.</p>
+          
+          <div class="meta"><b>Ámbito</b> · 08:41
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+<section id="ciencia">
+  <h2>Ciencia</h2>
+  
+  <div class="tarjetas">
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQNzlPLS1jQ3F6bGFFdTFiS0RLU09HMUhZVklGRUFvZzFnWFlzaGJDUmJyR1l4Ymhac3dZQlBxY1BlelBjM2VnSFV6RVFLT2Q4ZU1ISlhlME1BMFZ3R2lNOFVfV3pSMlV2bkZDVk51a1FOdXlZY28xZzA3anVZeF9vQ0hn0gGCAUFVX3lxTE1aVVAyUGdlVTY0SElVSHM0RmgxQkxXVGNta3pWS3NpNXlocEM2Q1lDaUQ4ZmU3dUFrT2Jlb3dOdC1WNnYxWmZ4SWJlWHlGLUNRb1l2V1RTb2l1dWhLNjlZLWk2M0tFY3ZiQXNRMEl6LW5jTlpBNWY5ZEhOX0lVRm1BZUE?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>La Voyager 1 de la NASA se comunica con la Tierra desde una distancia récord</h3>
+          
+          
+          <div class="meta"><b>Milenio</b> · ayer 20:26
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxQMUdha2pSY0NMLXdYTjdHZlQ2djgxbjNtTkpHQjZadVg3RkNDcy1lV25fZzJoUi16UWJSWXRudzQ3dXVGMlNXMWNmN3NUSmRXS1l3RFBiTkY0eTIxZnJKRWNhejhHWUxEM183YWxkUjkxZmVCOEhjT0pRUWN6Z3NKSVlpZWhzWlktM2xvZ3dhNm5YNlc2MDN0WURR?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>La NASA confirma que la Voyager 1 ha alcanzado un hito histórico: ya está a un día luz de la Tierra</h3>
+          
+          
+          <div class="meta"><b>Ecijaweb</b> · ayer 19:31
+            <span class="cobertura">2 medios</span>
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.quantamagazine.org/network-researchers-nail-down-theory-of-perfect-resilience-20261120/" target="_blank" rel="noopener">
+        <img src="https://www.quantamagazine.org/wp-content/uploads/2026/11/net-resilience-cr.DVDP-Default.webp" alt="" loading="lazy" onerror="this.remove()">
+        <div class="cuerpo">
+          <h3>Network Researchers Nail Down Theory of ‘Perfect Resilience’</h3>
+          <p>When links in a communication network go down, messages can get routed in a loop. Computer scientists now know that four simple network structures are to blame. The post Network Researchers Nail Down Theory of ‘Perfect…</p>
+          
+          <div class="meta"><b>Quanta Magazine</b> · 11:50
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.sciencedaily.com/releases/2026/11/261120070904.htm" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Keto diet slashes liver fat by 67% in just 4 months</h3>
+          <p>A new clinical trial found that the ketogenic diet dramatically outperformed Mediterranean and low-fat diets in reducing liver fat and improving metabolic health, even when participants lost similar amounts of weight.…</p>
+          
+          <div class="meta"><b>ScienceDaily</b> · 09:44
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://www.sciencedaily.com/releases/2026/11/261119194525.htm" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Scientists turn Moon dust into LEGO-like bricks for future lunar bases</h3>
+          <p>Scientists have found a way to 3D-print Moon dust into LEGO-like bricks, raising the possibility of building lunar bases using materials already on the Moon. The experimental blocks still need to be strengthened, but…</p>
+          
+          <div class="meta"><b>ScienceDaily</b> · 09:34
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxPU2k3WnFZZnNJdzlrSkxUT2MtTFVXcXpybWt5aldMcGl6ZjEtRjVjR0UzeVVwSTJKbGxuN0FDNXo3TmJFV2tCS3lWSG9LRkdueFI3SjVkT0ZxWk1aeWlheHdBWWZHVWtkZkE3SlhRX1llWGg2NTNQdUU2SDlLU2MwNURDc2FPWkpfYkFqZ09fZC1vU2pvLVl1T3A1R3A0dXBuXzZ6ZnROaVlLVTVwU1pnc0JHdXJPSjZ2TzRrSWhTUmNEMVFiUkhyTllaTmtSajZKNmfSAewBQVVfeXFMTmE5Q0QxVExrQWMyZXZEdGt1d1o4U1FmdzNFMEt6QVlfMmFPQmI3enFveFppMU81OFh6UUpzLXJDMGg4dE1vLUdRajR1Vkc4Yk84d3BOeC1JVmxNbUpjdkFHNmQyam4yRm5kRHVQb3dwSkRpUTVUZlg1NmU0aFRyN0c3NXJ2ckRTNUtnbFhTY3FDcGQwMU1hdDRvSEdmYmxZc1V2ano3Ym9qZTRhd1V6a3RCMHlLQUcwT2xJc2FaUV81eDlxajc5ZG13QXNleFh3RjE2cnhRNkRkcWluYkF6a2FqSlM0RGRwLXNOLUs?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Un análisis de sangre puede revolucionar el diagnóstico de la encefalopatía traumática crónica</h3>
+          
+          
+          <div class="meta"><b>Infobae</b> · 13:30
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMixAJBVV95cUxPRVh6REdjOERoTnBiRHFhckd2OFhHUUxDbThSZlpCUVZWcTQ4TkU3X1UydFl2eHh3djZJOWhVVzZ0MG50NF8zbGs3UW52ekxWRzl1ZmVoOFFFYVJ6aV9JRURzM1hHbWhzUTE4X1JmdFd4VjZtWnU0Nm9Na3ZfNERPbU0zUEhVMkgydkxyMnR2Y2JpZHl5dnZXNDR2bl9RRUZGTktEQW95dDQxUXUwTWtQcEN4MkotS3FTekJCZnJtcm5jeG9IR3dGa3FDNXhvZm9MZnk1ZDkwYjZBYkJ3YWZ0S2FyWkNjcHU4dEw3eXZkdnNWd2lDZmFBZWMwQklJdWRmbjFlSHAwNk5DckhTX0VyTjdpVDRtUmZWc0N3OVhSTV91LWE1M1ZUTVpQTklDUFVTeWJRemlESWtXSUNsRGlBY1JJMWbSAcQCQVVfeXFMTkF2dVF2WUgwN0x0VXBhZmptczhUZ1pEWEI5UDkxNE9xMEtyVkphZ3diR3RULTMtN1owXzMya3hDNnBaMVYzM2FXMGxoWXdTVG4yM1NzVGY4MUVoV0VJYmRsX2FXVGdoOTNsX2dMWlFwVEd2RlltbE5welJlTG5PTnBYcnpsWENLN2lQV3VzVy1NcnVtbE00dGs0QzdaZmRwcmlmc1FTSUxnbFlaSDJwZmhfV256eUZiSHdpY1B2VDFqbk1WU1hyUDgwV1lTUm1kd2pUaDkyT1BETWhqMlJQbVFOX3d4X3A1dEthNFF6XzhCUWRjLUctRS1OZXJQRnRONEszVUtYOXRFSVRzMXh6RjBNTlVLQy1UdlN0SGJRTjc0eWxRbG95ZDlDWmhIN0RuZzBKVlpzenVmR0lSWE1iTUJBRzBT?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Nasa confirma que &#34;fenómeno único&#34; se acaba de presentar en el espacio y fue observado por el telescopio James Webb: estrella se fusionó con planeta de galaxia vecina</h3>
+          
+          
+          <div class="meta"><b>NTN24</b> · 12:59
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxObi1mc2kzYWpNS0JXREtBZWdSLUZVSThrYVFBWXhuckJiNjVkeVlodHNyTHVNNEtWU2Z2amxONHBaUGZCZ2tjdlBGM29nQk1WRG82Q1ZhSnhlczRyb1ZTQmVKWE03WUoxV1RqTURFcGU5NGFyMHVNUndzSzVyWExGZkZyenN0YWJEb1pIRG1KNUJMQnZPQ2M1cWozUDNkb2gzQ2Y0ZFlmOVpUbDZKTGRRVEhOaDBGZzFvWnl5Yll0TVI5TVNuX202ZWZCbU44d25VQWx4OXJkcXJ0dW9OYVpRRnJvblLSAf8BQVVfeXFMUGVPdGlUYWNFREd3eEFrZzk4bHNxZWpmalhEWWN2ZXhKa01XWDdMM0hscWotSkc2NXN0OFppOGE1bnFBMFp0UnhhakVNVzhmN1hWU0lDNW93VTAta21Ed05ZbFFTV3pHZjhoUG8xd1BnSkhrR1IxbzQ5VjJlMVdoZ3ZqYzBLMElXTlhKVnloZ2xFQ0x2MS1WVGlBcW54RzN4WnYzR0twWmFxNnJpV01EWkJqT280b1hhOE5KTUlMUk9OTHBpdVpUME85Y1VDekdMWUdRSzVPVjNScHRnWnZSelJWLTNXU1RLN2dvMXBobWE5VFJ5QTNaWnhiR3N4c05n?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>Sin insulina: el hallazgo científico que apunta a un nuevo enfoque para el tratamiento de la diabetes</h3>
+          
+          
+          <div class="meta"><b>Infobae</b> · 12:41
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+    <article class="tarjeta">
+      <a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxPdU1YM2tSQXliVVdyVDJ3T1BXU1RSeEVoelhYQWEyVlJHQzJaLXRKTjVvRTZWZUh1UjdUaGpVbzdaVmdGN01XekZPeHlFNDgwbFFFRlZINUxQaHJoeHRrN1JIWGpPcENjd0JHOGFILXBncnk4LU43SzR3Mk03WFVfQkRQNHY3cVdsNnpIRTJ4UEtSekFpT1RuaXVCSXM5SWwwbnFMVGFjZmZGancwZ0tRV3N4ZjNsVlBndWNaN2hoRW9sSnNFZUJPUmV2cGNpSlJ0Wl9uTlkzVU04b1JFX2ZUdEFYRG84R0EwS0Rn?oc=5" target="_blank" rel="noopener">
+        
+        <div class="cuerpo">
+          <h3>La NASA publica cómo se ve el desierto florido desde el espacio: podría ser el más extenso de la era satelital</h3>
+          
+          
+          <div class="meta"><b>Meteored Chile</b> · 12:30
+            
+          </div>
+        </div>
+      </a>
+    </article>
+    
+  </div>
+  
+</section>
+
+
+</main>
+
+<footer>
+  <div>Generado el viernes 20 de noviembre de 2026, 14:46 (hora Uruguay)</div>
+  <div>
+    
+    <a href="index.html">Otros días</a> · <a href="../index.html">Panorama de hoy</a>
+    
+  </div>
+  
+  <div class="fallidas">Fuentes que hoy no respondieron: Google News «&#34;marketing digital&#34; OR publicidad industria» (Marketing y publicidad) · Google News «Uruguay actualidad gobierno OR economía OR sociedad» (Uruguay) · Agencia SINC (Ciencia)</div>
+  
+</footer>
+
+<script>
+  // Resalta en la barra la categoría que estás leyendo
+  const enlaces = [...document.querySelectorAll("nav.chips a")];
+  const secciones = enlaces
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+  const observador = new IntersectionObserver(entradas => {
+    for (const e of entradas) {
+      if (!e.isIntersecting) continue;
+      enlaces.forEach(a => a.classList.toggle(
+        "activo", a.getAttribute("href") === "#" + e.target.id));
+      const activo = document.querySelector("nav.chips a.activo");
+      if (activo) activo.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    }
+  }, { rootMargin: "-15% 0px -75% 0px" });
+  secciones.forEach(s => observador.observe(s));
+</script>
+
+</body>
+</html>
